@@ -1,0 +1,16 @@
+Bloody Mess;        pc.npc_kill_ap+=2, pc.pc_kill_ap+=2
+Bonehead;           pc.head_crical_hit_tier-=1, pc.special.I-=2
+Bruiser;            pc.special.S+=4, pc.speed-=10
+Chem Resistant;     pc.max_drugs+=5, pc.drug_duration+=30
+Fast Metabolism;    pc.healing_rate+=10, pc.hr_cooldown-=10, pc.drug_duration-=15
+Fast Shot;          pc.critical_power-=35
+Finesse;            pc.critical_chance+=15, pc.enemy_dr+=30
+Good Natured;       pc.party_points+=50
+Heavy Handed;       pc.critical_power-=20
+Jinxed;             None
+Kamikaze;           pc.bonus_damage+=15, pc.dr.normal-=10, pc.dr.laser-=10, pc.dr.plasma-=10, pc.dr.fire-=10, pc.dr.electric-=10, pc.dr.explode-=10
+Loner;              pc.xp_bonus+=15
+One Hander;         None
+Small Frame;        pc.special.A+=1
+Gifted;             pc.special_points+=7, pc.min_special+=1
+Cannibal;           None

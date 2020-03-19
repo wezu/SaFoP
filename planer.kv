@@ -1,0 +1,2502 @@
+<Widget>:
+    font_name:'data/fonts/monofonto.ttf'
+    color: 0.05, 1.0, 0.15, 1
+    disabled_color: 0.1, 0.9, 0.1, 0.6
+
+<Label>:
+    valign: 'center'
+
+<SpecialLabel@Label>:
+    font_size: '18dp'
+
+<SkillButton@Button>:
+    width: '48dp'
+    size_hint_x: None
+    on_release: app.stop_skill_interval()
+    disabled: True
+
+<SpecialButton@Button>:
+    width: self.height
+    font_size: '30dp'
+    size_hint_x: None
+
+<ScrollView>
+    bar_color: 0.05, 0.8, 0.05, 0.7
+    bar_width: 4
+
+<CustomPopup>
+    size_hint: .8, .8
+    padding: 10, 20
+
+<PopupLabel>
+    font_size: '18dp'
+    size_hint_y: None
+    size: self.texture_size
+
+<PopupGridLayout>
+    height: self.minimum_height
+    size_hint_y: None
+    spacing: 0, 2
+    padding: 20, 0
+    cols: 1
+
+<PopupInput>:
+    font_size: '18dp'
+    multiline: False
+    height: '38dp'
+    size_hint_y: None
+    cursor_color: 0.10, 1.0, 0.15, 1
+    foreground_color: 0.0, 1.0, 0.15, 1
+
+<PopupButton>
+    height: '38dp'
+    size_hint: 0.1, None
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: 3
+    spacing: 3
+    BoxLayout:
+        pos_hint: {'center_x': 0.5}
+        size_hint_y: None
+        height: '34dp'
+        Label:
+            text: 'Level: 1'
+            id: level_label
+        Button:
+            id: level_up
+            on_release: app.level_up()
+            text: '+1 Level'
+            disabled: True
+        Button:
+            id: level_restore
+            text: '-1 Level'
+            disabled: True
+            on_release: app.level_restore()
+        Button:
+            id: level_up_all
+            text: '++Levels'
+            disabled: True
+            on_release: app.level_up(True)
+        Button:
+            text: 'Save/Load'
+            on_release: app.save_load_popup()
+        Button:
+            on_release: app.stop()
+            text: 'Exit'
+            width: '70dp'
+            size_hint_x:None
+            #disabled: True
+    Accordion:
+        orientation: 'horizontal'
+
+        AccordionItem:
+            title: 'Stats'
+            on_collapse: app.update_stats(self)
+            ScrollView:
+                Label:
+                    padding: 10, 10
+                    id: stats_txt
+                    text: "Work in Progress..."
+                    size_hint_y: None
+                    text_size: self.width, None
+                    height: self.texture_size[1]
+
+        AccordionItem:
+            title: 'Drugs, Books and Implants'
+            disabled: True
+            id: drugs_book_implant_tab
+            ScrollView:
+                GridLayout:
+                    height: self.minimum_height
+                    size_hint_y: None
+                    row_default_height: '32dp'
+                    row_force_default: True
+                    spacing: 0, 0
+                    padding: 30, 2
+                    cols: 1
+                    Label:
+                        text: '--DRUGS--'
+                    ToggleButton:
+                        id: drug_beer
+                        text: 'Beer'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_booze
+                        text: 'Booze'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_buffout
+                        text: 'Buffout'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_cigarettes
+                        text: 'Cigarettes'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_cookie
+                        text: 'Cookie'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_gamma_gulp_beer
+                        text: 'Gamma Gulp Beer'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_healing_powder
+                        text: 'Healing Powder'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_jet
+                        text: 'Jet'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_mentats
+                        text: 'Mentats'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_nuka-cola
+                        text: 'Nuka-Cola'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_psycho
+                        text: 'Psycho'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_roentgen_rum
+                        text: 'Roentgen Rum'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_rot_gut
+                        text: 'Rot Gut'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_after_burner_gum
+                        text: 'After Burner Gum'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_mutie
+                        text: 'Mutie'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    ToggleButton:
+                        id: drug_voodoo
+                        text: 'Voodoo'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                    Label:
+                        text: '--CANNIBAL DRUGS--'
+                    ToggleButton:
+                        id: cannibal_drug_brain
+                        text: 'Brain'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                        disabled: True
+                    ToggleButton:
+                        id: cannibal_drug_eye
+                        text: 'Eye'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                        disabled: True
+                    ToggleButton:
+                        id: cannibal_drug_ear
+                        text: 'Ear'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                        disabled: True
+                    ToggleButton:
+                        id: cannibal_drug_heart
+                        text: 'Heart'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                        disabled: True
+                    ToggleButton:
+                        id: cannibal_drug_liver
+                        text: 'Liver'
+                        size_hint_x: 0.8
+                        on_state: app.add_drug(self)
+                        disabled: True
+                    Label:
+                        text:'--BOOKS--'
+                    Label:
+                        text: 'Small Guns'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_small_guns
+                            text:"1"
+                            on_state: app.add_book("small_guns", 1)
+                        ToggleButton:
+                            id: book_2_small_guns
+                            text:"2"
+                            on_state: app.add_book("small_guns", 2)
+                        ToggleButton:
+                            id: book_3_small_guns
+                            text:"3"
+                            on_state: app.add_book("small_guns", 3)
+                        ToggleButton:
+                            id: book_4_small_guns
+                            text:"4"
+                            on_state: app.add_book("small_guns", 4)
+                        ToggleButton:
+                            id: book_5_small_guns
+                            text:"5"
+                            on_state: app.add_book("small_guns", 5)
+                        ToggleButton:
+                            id: book_6_small_guns
+                            text:"6"
+                            on_state: app.add_book("small_guns", 6)
+                        ToggleButton:
+                            id: book_7_small_guns
+                            text:"7"
+                            on_state: app.add_book("small_guns", 7)
+                        ToggleButton:
+                            id: book_8_small_guns
+                            text:"8"
+                            on_state: app.add_book("small_guns", 8)
+                        ToggleButton:
+                            id: book_9_small_guns
+                            text:"9"
+                            on_state: app.add_book("small_guns", 9)
+                        ToggleButton:
+                            id: book_10_small_guns
+                            text:"10"
+                            on_state: app.add_book("small_guns", 10)
+                    Label:
+                        text: 'Big Guns'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_big_guns
+                            text:"1"
+                            on_state: app.add_book("big_guns", 1)
+                        ToggleButton:
+                            id: book_2_big_guns
+                            text:"2"
+                            on_state: app.add_book("big_guns", 2)
+                        ToggleButton:
+                            id: book_3_big_guns
+                            text:"3"
+                            on_state: app.add_book("big_guns", 3)
+                        ToggleButton:
+                            id: book_4_big_guns
+                            text:"4"
+                            on_state: app.add_book("big_guns", 4)
+                        ToggleButton:
+                            id: book_5_big_guns
+                            text:"5"
+                            on_state: app.add_book("big_guns", 5)
+                        ToggleButton:
+                            id: book_6_big_guns
+                            text:"6"
+                            on_state: app.add_book("big_guns", 6)
+                        ToggleButton:
+                            id: book_7_big_guns
+                            text:"7"
+                            on_state: app.add_book("big_guns", 7)
+                        ToggleButton:
+                            id: book_8_big_guns
+                            text:"8"
+                            on_state: app.add_book("big_guns", 8)
+                        ToggleButton:
+                            id: book_9_big_guns
+                            text:"9"
+                            on_state: app.add_book("big_guns", 9)
+                        ToggleButton:
+                            id: book_10_big_guns
+                            text:"10"
+                            on_state: app.add_book("big_guns", 10)
+                    Label:
+                        text: 'Energy Weapons'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_energy_weapons
+                            text:"1"
+                            on_state: app.add_book("energy_weapons", 1)
+                        ToggleButton:
+                            id: book_2_energy_weapons
+                            text:"2"
+                            on_state: app.add_book("energy_weapons", 2)
+                        ToggleButton:
+                            id: book_3_energy_weapons
+                            text:"3"
+                            on_state: app.add_book("energy_weapons", 3)
+                        ToggleButton:
+                            id: book_4_energy_weapons
+                            text:"4"
+                            on_state: app.add_book("energy_weapons", 4)
+                        ToggleButton:
+                            id: book_5_energy_weapons
+                            text:"5"
+                            on_state: app.add_book("energy_weapons", 5)
+                        ToggleButton:
+                            id: book_6_energy_weapons
+                            text:"6"
+                            on_state: app.add_book("energy_weapons", 6)
+                        ToggleButton:
+                            id: book_7_energy_weapons
+                            text:"7"
+                            on_state: app.add_book("energy_weapons", 7)
+                        ToggleButton:
+                            id: book_8_energy_weapons
+                            text:"8"
+                            on_state: app.add_book("energy_weapons", 8)
+                        ToggleButton:
+                            id: book_9_energy_weapons
+                            text:"9"
+                            on_state: app.add_book("energy_weapons", 9)
+                        ToggleButton:
+                            id: book_10_energy_weapons
+                            text:"10"
+                            on_state: app.add_book("energy_weapons", 10)
+                    Label:
+                        text: 'Close Combat'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_close_combat
+                            text:"1"
+                            on_state: app.add_book("close_combat", 1)
+                        ToggleButton:
+                            id: book_2_close_combat
+                            text:"2"
+                            on_state: app.add_book("close_combat", 2)
+                        ToggleButton:
+                            id: book_3_close_combat
+                            text:"3"
+                            on_state: app.add_book("close_combat", 3)
+                        ToggleButton:
+                            id: book_4_close_combat
+                            text:"4"
+                            on_state: app.add_book("close_combat", 4)
+                        ToggleButton:
+                            id: book_5_close_combat
+                            text:"5"
+                            on_state: app.add_book("close_combat", 5)
+                        ToggleButton:
+                            id: book_6_close_combat
+                            text:"6"
+                            on_state: app.add_book("close_combat", 6)
+                        ToggleButton:
+                            id: book_7_close_combat
+                            text:"7"
+                            on_state: app.add_book("close_combat", 7)
+                        ToggleButton:
+                            id: book_8_close_combat
+                            text:"8"
+                            on_state: app.add_book("close_combat", 8)
+                        ToggleButton:
+                            id: book_9_close_combat
+                            text:"9"
+                            on_state: app.add_book("close_combat", 9)
+                        ToggleButton:
+                            id: book_10_close_combat
+                            text:"10"
+                            on_state: app.add_book("close_combat", 10)
+                    Label:
+                        text: 'Throwing'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_throwing
+                            text:"1"
+                            on_state: app.add_book("throwing", 1)
+                        ToggleButton:
+                            id: book_2_throwing
+                            text:"2"
+                            on_state: app.add_book("throwing", 2)
+                        ToggleButton:
+                            id: book_3_throwing
+                            text:"3"
+                            on_state: app.add_book("throwing", 3)
+                        ToggleButton:
+                            id: book_4_throwing
+                            text:"4"
+                            on_state: app.add_book("throwing", 4)
+                        ToggleButton:
+                            id: book_5_throwing
+                            text:"5"
+                            on_state: app.add_book("throwing", 5)
+                        ToggleButton:
+                            id: book_6_throwing
+                            text:"6"
+                            on_state: app.add_book("throwing", 6)
+                        ToggleButton:
+                            id: book_7_throwing
+                            text:"7"
+                            on_state: app.add_book("throwing", 7)
+                        ToggleButton:
+                            id: book_8_throwing
+                            text:"8"
+                            on_state: app.add_book("throwing", 8)
+                        ToggleButton:
+                            id: book_9_throwing
+                            text:"9"
+                            on_state: app.add_book("throwing", 9)
+                        ToggleButton:
+                            id: book_10_throwing
+                            text:"10"
+                            on_state: app.add_book("throwing", 10)
+                    Label:
+                        text: 'First Aid'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_first_aid
+                            text:"1"
+                            on_state: app.add_book("first_aid", 1)
+                        ToggleButton:
+                            id: book_2_first_aid
+                            text:"2"
+                            on_state: app.add_book("first_aid", 2)
+                        ToggleButton:
+                            id: book_3_first_aid
+                            text:"3"
+                            on_state: app.add_book("first_aid", 3)
+                        ToggleButton:
+                            id: book_4_first_aid
+                            text:"4"
+                            on_state: app.add_book("first_aid", 4)
+                        ToggleButton:
+                            id: book_5_first_aid
+                            text:"5"
+                            on_state: app.add_book("first_aid", 5)
+                        ToggleButton:
+                            id: book_6_first_aid
+                            text:"6"
+                            on_state: app.add_book("first_aid", 6)
+                        ToggleButton:
+                            id: book_7_first_aid
+                            text:"7"
+                            on_state: app.add_book("first_aid", 7)
+                        ToggleButton:
+                            id: book_8_first_aid
+                            text:"8"
+                            on_state: app.add_book("first_aid", 8)
+                        ToggleButton:
+                            id: book_9_first_aid
+                            text:"9"
+                            on_state: app.add_book("first_aid", 9)
+                        ToggleButton:
+                            id: book_10_first_aid
+                            text:"10"
+                            on_state: app.add_book("first_aid", 10)
+                    Label:
+                        text: 'Doctor'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_doctor
+                            text:"1"
+                            on_state: app.add_book("doctor", 1)
+                        ToggleButton:
+                            id: book_2_doctor
+                            text:"2"
+                            on_state: app.add_book("doctor", 2)
+                        ToggleButton:
+                            id: book_3_doctor
+                            text:"3"
+                            on_state: app.add_book("doctor", 3)
+                        ToggleButton:
+                            id: book_4_doctor
+                            text:"4"
+                            on_state: app.add_book("doctor", 4)
+                        ToggleButton:
+                            id: book_5_doctor
+                            text:"5"
+                            on_state: app.add_book("doctor", 5)
+                        ToggleButton:
+                            id: book_6_doctor
+                            text:"6"
+                            on_state: app.add_book("doctor", 6)
+                        ToggleButton:
+                            id: book_7_doctor
+                            text:"7"
+                            on_state: app.add_book("doctor", 7)
+                        ToggleButton:
+                            id: book_8_doctor
+                            text:"8"
+                            on_state: app.add_book("doctor", 8)
+                        ToggleButton:
+                            id: book_9_doctor
+                            text:"9"
+                            on_state: app.add_book("doctor", 9)
+                        ToggleButton:
+                            id: book_10_doctor
+                            text:"10"
+                            on_state: app.add_book("doctor", 10)
+                    Label:
+                        text: 'Sneak'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_sneak
+                            text:"1"
+                            on_state: app.add_book("sneak", 1)
+                        ToggleButton:
+                            id: book_2_sneak
+                            text:"2"
+                            on_state: app.add_book("sneak", 2)
+                        ToggleButton:
+                            id: book_3_sneak
+                            text:"3"
+                            on_state: app.add_book("sneak", 3)
+                        ToggleButton:
+                            id: book_4_sneak
+                            text:"4"
+                            on_state: app.add_book("sneak", 4)
+                        ToggleButton:
+                            id: book_5_sneak
+                            text:"5"
+                            on_state: app.add_book("sneak", 5)
+                        ToggleButton:
+                            id: book_6_sneak
+                            text:"6"
+                            on_state: app.add_book("sneak", 6)
+                        ToggleButton:
+                            id: book_7_sneak
+                            text:"7"
+                            on_state: app.add_book("sneak", 7)
+                        ToggleButton:
+                            id: book_8_sneak
+                            text:"8"
+                            on_state: app.add_book("sneak", 8)
+                        ToggleButton:
+                            id: book_9_sneak
+                            text:"9"
+                            on_state: app.add_book("sneak", 9)
+                        ToggleButton:
+                            id: book_10_sneak
+                            text:"10"
+                            on_state: app.add_book("sneak", 10)
+                    Label:
+                        text: 'Lockpick'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_lockpick
+                            text:"1"
+                            on_state: app.add_book("lockpick", 1)
+                        ToggleButton:
+                            id: book_2_lockpick
+                            text:"2"
+                            on_state: app.add_book("lockpick", 2)
+                        ToggleButton:
+                            id: book_3_lockpick
+                            text:"3"
+                            on_state: app.add_book("lockpick", 3)
+                        ToggleButton:
+                            id: book_4_lockpick
+                            text:"4"
+                            on_state: app.add_book("lockpick", 4)
+                        ToggleButton:
+                            id: book_5_lockpick
+                            text:"5"
+                            on_state: app.add_book("lockpick", 5)
+                        ToggleButton:
+                            id: book_6_lockpick
+                            text:"6"
+                            on_state: app.add_book("lockpick", 6)
+                        ToggleButton:
+                            id: book_7_lockpick
+                            text:"7"
+                            on_state: app.add_book("lockpick", 7)
+                        ToggleButton:
+                            id: book_8_lockpick
+                            text:"8"
+                            on_state: app.add_book("lockpick", 8)
+                        ToggleButton:
+                            id: book_9_lockpick
+                            text:"9"
+                            on_state: app.add_book("lockpick", 9)
+                        ToggleButton:
+                            id: book_10_lockpick
+                            text:"10"
+                            on_state: app.add_book("lockpick", 10)
+                    Label:
+                        text: 'Steal'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_steal
+                            text:"1"
+                            on_state: app.add_book("steal", 1)
+                        ToggleButton:
+                            id: book_2_steal
+                            text:"2"
+                            on_state: app.add_book("steal", 2)
+                        ToggleButton:
+                            id: book_3_steal
+                            text:"3"
+                            on_state: app.add_book("steal", 3)
+                        ToggleButton:
+                            id: book_4_steal
+                            text:"4"
+                            on_state: app.add_book("steal", 4)
+                        ToggleButton:
+                            id: book_5_steal
+                            text:"5"
+                            on_state: app.add_book("steal", 5)
+                        ToggleButton:
+                            id: book_6_steal
+                            text:"6"
+                            on_state: app.add_book("steal", 6)
+                        ToggleButton:
+                            id: book_7_steal
+                            text:"7"
+                            on_state: app.add_book("steal", 7)
+                        ToggleButton:
+                            id: book_8_steal
+                            text:"8"
+                            on_state: app.add_book("steal", 8)
+                        ToggleButton:
+                            id: book_9_steal
+                            text:"9"
+                            on_state: app.add_book("steal", 9)
+                        ToggleButton:
+                            id: book_10_steal
+                            text:"10"
+                            on_state: app.add_book("steal", 10)
+                    Label:
+                        text: 'Traps'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_traps
+                            text:"1"
+                            on_state: app.add_book("traps", 1)
+                        ToggleButton:
+                            id: book_2_traps
+                            text:"2"
+                            on_state: app.add_book("traps", 2)
+                        ToggleButton:
+                            id: book_3_traps
+                            text:"3"
+                            on_state: app.add_book("traps", 3)
+                        ToggleButton:
+                            id: book_4_traps
+                            text:"4"
+                            on_state: app.add_book("traps", 4)
+                        ToggleButton:
+                            id: book_5_traps
+                            text:"5"
+                            on_state: app.add_book("traps", 5)
+                        ToggleButton:
+                            id: book_6_traps
+                            text:"6"
+                            on_state: app.add_book("traps", 6)
+                        ToggleButton:
+                            id: book_7_traps
+                            text:"7"
+                            on_state: app.add_book("traps", 7)
+                        ToggleButton:
+                            id: book_8_traps
+                            text:"8"
+                            on_state: app.add_book("traps", 8)
+                        ToggleButton:
+                            id: book_9_traps
+                            text:"9"
+                            on_state: app.add_book("traps", 9)
+                        ToggleButton:
+                            id: book_10_traps
+                            text:"10"
+                            on_state: app.add_book("traps", 10)
+                    Label:
+                        text: 'Science'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_science
+                            text:"1"
+                            on_state: app.add_book("science", 1)
+                        ToggleButton:
+                            id: book_2_science
+                            text:"2"
+                            on_state: app.add_book("science", 2)
+                        ToggleButton:
+                            id: book_3_science
+                            text:"3"
+                            on_state: app.add_book("science", 3)
+                        ToggleButton:
+                            id: book_4_science
+                            text:"4"
+                            on_state: app.add_book("science", 4)
+                        ToggleButton:
+                            id: book_5_science
+                            text:"5"
+                            on_state: app.add_book("science", 5)
+                        ToggleButton:
+                            id: book_6_science
+                            text:"6"
+                            on_state: app.add_book("science", 6)
+                        ToggleButton:
+                            id: book_7_science
+                            text:"7"
+                            on_state: app.add_book("science", 7)
+                        ToggleButton:
+                            id: book_8_science
+                            text:"8"
+                            on_state: app.add_book("science", 8)
+                        ToggleButton:
+                            id: book_9_science
+                            text:"9"
+                            on_state: app.add_book("science", 9)
+                        ToggleButton:
+                            id: book_10_science
+                            text:"10"
+                            on_state: app.add_book("science", 10)
+                    Label:
+                        text: 'Repair'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_repair
+                            text:"1"
+                            on_state: app.add_book("repair", 1)
+                        ToggleButton:
+                            id: book_2_repair
+                            text:"2"
+                            on_state: app.add_book("repair", 2)
+                        ToggleButton:
+                            id: book_3_repair
+                            text:"3"
+                            on_state: app.add_book("repair", 3)
+                        ToggleButton:
+                            id: book_4_repair
+                            text:"4"
+                            on_state: app.add_book("repair", 4)
+                        ToggleButton:
+                            id: book_5_repair
+                            text:"5"
+                            on_state: app.add_book("repair", 5)
+                        ToggleButton:
+                            id: book_6_repair
+                            text:"6"
+                            on_state: app.add_book("repair", 6)
+                        ToggleButton:
+                            id: book_7_repair
+                            text:"7"
+                            on_state: app.add_book("repair", 7)
+                        ToggleButton:
+                            id: book_8_repair
+                            text:"8"
+                            on_state: app.add_book("repair", 8)
+                        ToggleButton:
+                            id: book_9_repair
+                            text:"9"
+                            on_state: app.add_book("repair", 9)
+                        ToggleButton:
+                            id: book_10_repair
+                            text:"10"
+                            on_state: app.add_book("repair", 10)
+                    Label:
+                        text: 'Barter'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_barter
+                            text:"1"
+                            on_state: app.add_book("barter", 1)
+                        ToggleButton:
+                            id: book_2_barter
+                            text:"2"
+                            on_state: app.add_book("barter", 2)
+                        ToggleButton:
+                            id: book_3_barter
+                            text:"3"
+                            on_state: app.add_book("barter", 3)
+                        ToggleButton:
+                            id: book_4_barter
+                            text:"4"
+                            on_state: app.add_book("barter", 4)
+                        ToggleButton:
+                            id: book_5_barter
+                            text:"5"
+                            on_state: app.add_book("barter", 5)
+                        ToggleButton:
+                            id: book_6_barter
+                            text:"6"
+                            on_state: app.add_book("barter", 6)
+                        ToggleButton:
+                            id: book_7_barter
+                            text:"7"
+                            on_state: app.add_book("barter", 7)
+                        ToggleButton:
+                            id: book_8_barter
+                            text:"8"
+                            on_state: app.add_book("barter", 8)
+                        ToggleButton:
+                            id: book_9_barter
+                            text:"9"
+                            on_state: app.add_book("barter", 9)
+                        ToggleButton:
+                            id: book_10_barter
+                            text:"10"
+                            on_state: app.add_book("barter", 10)
+                    Label:
+                        text: 'Outdoorsman'
+                    BoxLayout:
+                        ToggleButton:
+                            id: book_1_outdoorsman
+                            text:"1"
+                            on_state: app.add_book("outdoorsman", 1)
+                        ToggleButton:
+                            id: book_2_outdoorsman
+                            text:"2"
+                            on_state: app.add_book("outdoorsman", 2)
+                        ToggleButton:
+                            id: book_3_outdoorsman
+                            text:"3"
+                            on_state: app.add_book("outdoorsman", 3)
+                        ToggleButton:
+                            id: book_4_outdoorsman
+                            text:"4"
+                            on_state: app.add_book("outdoorsman", 4)
+                        ToggleButton:
+                            id: book_5_outdoorsman
+                            text:"5"
+                            on_state: app.add_book("outdoorsman", 5)
+                        ToggleButton:
+                            id: book_6_outdoorsman
+                            text:"6"
+                            on_state: app.add_book("outdoorsman", 6)
+                        ToggleButton:
+                            id: book_7_outdoorsman
+                            text:"7"
+                            on_state: app.add_book("outdoorsman", 7)
+                        ToggleButton:
+                            id: book_8_outdoorsman
+                            text:"8"
+                            on_state: app.add_book("outdoorsman", 8)
+                        ToggleButton:
+                            id: book_9_outdoorsman
+                            text:"9"
+                            on_state: app.add_book("outdoorsman", 9)
+                        ToggleButton:
+                            id: book_10_outdoorsman
+                            text:"10"
+                            on_state: app.add_book("outdoorsman", 10)
+                    Label:
+                        text: '--IMPLANTS--'
+                    Label:
+                        text: 'Strength'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_S
+                            text:"1"
+                            on_state: app.add_special_implant("S", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_S
+                            text:"2"
+                            on_state: app.add_special_implant("S", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_S
+                            text:"3"
+                            on_state: app.add_special_implant("S", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_S
+                            text:"4"
+                            on_state: app.add_special_implant("S", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_S
+                            text:"5"
+                            on_state: app.add_special_implant("S", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_S
+                            text:"6"
+                            on_state: app.add_special_implant("S", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_S
+                            text:"7"
+                            on_state: app.add_special_implant("S", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_S
+                            text:"8"
+                            on_state: app.add_special_implant("S", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_S
+                            text:"9"
+                            on_state: app.add_special_implant("S", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_S
+                            text:"10"
+                            on_state: app.add_special_implant("S", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_S
+                            text:"11"
+                            on_state: app.add_special_implant("S", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_S
+                            text:"12"
+                            on_state: app.add_special_implant("S", 12)
+                            disabled: True
+                    Label:
+                        text: 'Perception'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_P
+                            text:"1"
+                            on_state: app.add_special_implant("P", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_P
+                            text:"2"
+                            on_state: app.add_special_implant("P", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_P
+                            text:"3"
+                            on_state: app.add_special_implant("P", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_P
+                            text:"4"
+                            on_state: app.add_special_implant("P", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_P
+                            text:"5"
+                            on_state: app.add_special_implant("P", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_P
+                            text:"6"
+                            on_state: app.add_special_implant("P", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_P
+                            text:"7"
+                            on_state: app.add_special_implant("P", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_P
+                            text:"8"
+                            on_state: app.add_special_implant("P", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_P
+                            text:"9"
+                            on_state: app.add_special_implant("P", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_P
+                            text:"10"
+                            on_state: app.add_special_implant("P", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_P
+                            text:"11"
+                            on_state: app.add_special_implant("P", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_P
+                            text:"12"
+                            on_state: app.add_special_implant("P", 12)
+                            disabled: True
+                    Label:
+                        text: 'Endurance'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_E
+                            text:"1"
+                            on_state: app.add_special_implant("E", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_E
+                            text:"2"
+                            on_state: app.add_special_implant("E", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_E
+                            text:"3"
+                            on_state: app.add_special_implant("E", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_E
+                            text:"4"
+                            on_state: app.add_special_implant("E", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_E
+                            text:"5"
+                            on_state: app.add_special_implant("E", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_E
+                            text:"6"
+                            on_state: app.add_special_implant("E", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_E
+                            text:"7"
+                            on_state: app.add_special_implant("E", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_E
+                            text:"8"
+                            on_state: app.add_special_implant("E", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_E
+                            text:"9"
+                            on_state: app.add_special_implant("E", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_E
+                            text:"10"
+                            on_state: app.add_special_implant("E", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_E
+                            text:"11"
+                            on_state: app.add_special_implant("E", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_E
+                            text:"12"
+                            on_state: app.add_special_implant("E", 12)
+                            disabled: True
+                    Label:
+                        text: 'Charisma'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_C
+                            text:"1"
+                            on_state: app.add_special_implant("C", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_C
+                            text:"2"
+                            on_state: app.add_special_implant("C", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_C
+                            text:"3"
+                            on_state: app.add_special_implant("C", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_C
+                            text:"4"
+                            on_state: app.add_special_implant("C", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_C
+                            text:"5"
+                            on_state: app.add_special_implant("C", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_C
+                            text:"6"
+                            on_state: app.add_special_implant("C", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_C
+                            text:"7"
+                            on_state: app.add_special_implant("C", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_C
+                            text:"8"
+                            on_state: app.add_special_implant("C", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_C
+                            text:"9"
+                            on_state: app.add_special_implant("C", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_C
+                            text:"10"
+                            on_state: app.add_special_implant("C", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_C
+                            text:"11"
+                            on_state: app.add_special_implant("C", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_C
+                            text:"12"
+                            on_state: app.add_special_implant("C", 12)
+                            disabled: True
+                    Label:
+                        text: 'Intelligence'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_I
+                            text:"1"
+                            on_state: app.add_special_implant("I", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_I
+                            text:"2"
+                            on_state: app.add_special_implant("I", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_I
+                            text:"3"
+                            on_state: app.add_special_implant("I", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_I
+                            text:"4"
+                            on_state: app.add_special_implant("I", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_I
+                            text:"5"
+                            on_state: app.add_special_implant("I", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_I
+                            text:"6"
+                            on_state: app.add_special_implant("I", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_I
+                            text:"7"
+                            on_state: app.add_special_implant("I", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_I
+                            text:"8"
+                            on_state: app.add_special_implant("I", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_I
+                            text:"9"
+                            on_state: app.add_special_implant("I", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_I
+                            text:"10"
+                            on_state: app.add_special_implant("I", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_I
+                            text:"11"
+                            on_state: app.add_special_implant("I", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_I
+                            text:"12"
+                            on_state: app.add_special_implant("I", 12)
+                            disabled: True
+                    Label:
+                        text: 'Agility'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_A
+                            text:"1"
+                            on_state: app.add_special_implant("A", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_A
+                            text:"2"
+                            on_state: app.add_special_implant("A", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_A
+                            text:"3"
+                            on_state: app.add_special_implant("A", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_A
+                            text:"4"
+                            on_state: app.add_special_implant("A", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_A
+                            text:"5"
+                            on_state: app.add_special_implant("A", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_A
+                            text:"6"
+                            on_state: app.add_special_implant("A", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_A
+                            text:"7"
+                            on_state: app.add_special_implant("A", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_A
+                            text:"8"
+                            on_state: app.add_special_implant("A", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_A
+                            text:"9"
+                            on_state: app.add_special_implant("A", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_A
+                            text:"10"
+                            on_state: app.add_special_implant("A", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_A
+                            text:"11"
+                            on_state: app.add_special_implant("A", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_A
+                            text:"12"
+                            on_state: app.add_special_implant("A", 12)
+                            disabled: True
+                    Label:
+                        text: 'Luck'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_special_1_L
+                            text:"1"
+                            on_state: app.add_special_implant("L", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_2_L
+                            text:"2"
+                            on_state: app.add_special_implant("L", 2)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_3_L
+                            text:"3"
+                            on_state: app.add_special_implant("L", 3)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_4_L
+                            text:"4"
+                            on_state: app.add_special_implant("L", 4)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_5_L
+                            text:"5"
+                            on_state: app.add_special_implant("L", 5)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_6_L
+                            text:"6"
+                            on_state: app.add_special_implant("L", 6)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_7_L
+                            text:"7"
+                            on_state: app.add_special_implant("L", 7)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_8_L
+                            text:"8"
+                            on_state: app.add_special_implant("L", 8)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_9_L
+                            text:"9"
+                            on_state: app.add_special_implant("L", 9)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_10_L
+                            text:"10"
+                            on_state: app.add_special_implant("L", 10)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_11_L
+                            text:"11"
+                            on_state: app.add_special_implant("L", 11)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_special_12_L
+                            text:"12"
+                            on_state: app.add_special_implant("L", 12)
+                            disabled: True
+                    Label:
+                        text:'Dermal Impact Armor'
+                    BoxLayout:
+                        ToggleButton:
+                            text:'1'
+                            id: implant_dermal_impact_armor_1
+                            on_state: app.add_implant("dermal_impact_armor", 1)
+                            disabled: True
+                        ToggleButton:
+                            id: implant_dermal_impact_armor_2
+                            on_state: app.add_implant("dermal_impact_armor", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_dermal_impact_armor_3
+                            on_state: app.add_implant("dermal_impact_armor", 3)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Phoenix Armor'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_phoenix_armor_1
+                            on_state: app.add_implant("phoenix_armor", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_phoenix_armor_2
+                            on_state: app.add_implant("phoenix_armor", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_phoenix_armor_3
+                            on_state: app.add_implant("phoenix_armor", 2)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Aggressive Sensors'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_aggressive_sensors_1
+                            on_state: app.add_implant("aggressive_sensors", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_aggressive_sensors_2
+                            on_state: app.add_implant("aggressive_sensors", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_aggressive_sensors_3
+                            on_state: app.add_implant("aggressive_sensors", 3)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Dragon System'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_dragon_system_1
+                            on_state: app.add_implant("dragon_system", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_dragon_system_2
+                            on_state: app.add_implant("dragon_system", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_dragon_system_3
+                            on_state: app.add_implant("dragon_system", 3)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Claw Module'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_claw_module_1
+                            on_state: app.add_implant("claw_module", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_claw_module_2
+                            on_state: app.add_implant("claw_module", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_claw_module_3
+                            on_state: app.add_implant("claw_module", 3)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Tiger Movement'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_tiger_movement_1
+                            on_state: app.add_implant("tiger_movement", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_tiger_movement_2
+                            on_state: app.add_implant("tiger_movement", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_tiger_movement_3
+                            on_state: app.add_implant("tiger_movement", 3)
+                            disabled: True
+                            text:'3'
+
+                    Label:
+                        text:'Tactical Chip'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_tactical_chip_1
+                            on_state: app.add_implant("tactical_chip", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_tactical_chip_2
+                            on_state: app.add_implant("tactical_chip", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_tactical_chip_3
+                            on_state: app.add_implant("tactical_chip", 3)
+                            disabled: True
+                            text:'3'
+                    Label:
+                        text:'Nemean Armor'
+                    BoxLayout:
+                        ToggleButton:
+                            id: implant_nemean_armor_1
+                            on_state: app.add_implant("nemean_armor", 1)
+                            disabled: True
+                            text:'1'
+                        ToggleButton:
+                            id: implant_nemean_armor_2
+                            on_state: app.add_implant("nemean_armor", 2)
+                            disabled: True
+                            text:'2'
+                        ToggleButton:
+                            id: implant_nemean_armor_3
+                            on_state: app.add_implant("nemean_armor", 3)
+                            disabled: True
+                            text:'3'
+        AccordionItem:
+            title: 'Skills'
+            BoxLayout:
+                orientation: 'vertical'
+                padding:0,0,4,0
+                Label:
+                    text: "Skill Points: 0"
+                    id: skill_points
+                    font_size: '24dp'
+                    size_hint_y: None
+                    size: self.texture_size
+                ScrollView:
+                    GridLayout:
+                        id: skill_grid
+                        height: self.minimum_height
+                        size_hint_y: None
+                        row_default_height: '32dp'
+                        row_force_default: True
+                        spacing: 0, 0
+                        padding: 10, 0
+                        cols: 4
+                        Label:
+                            text: "Small Guns"
+                        Label:
+                            id: small_guns
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('small_guns', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('small_guns', 1)
+                            text: '+'
+                        Label:
+                            text: "Big Guns"
+                        Label:
+                            id: big_guns
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('big_guns', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('big_guns', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Energy Weapons"
+                        Label:
+                            id: energy_weapons
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('energy_weapons', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('energy_weapons', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Close Combat"
+                        Label:
+                            id: close_combat
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('close_combat', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('close_combat', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Throwing"
+                        Label:
+                            id: throwing
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('throwing', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('throwing', 1)
+                            text: '+'
+
+                        Label:
+                            text: "First Aid"
+                        Label:
+                            id: first_aid
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('first_aid', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('first_aid', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Doctor"
+                        Label:
+                            id: doctor
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('doctor', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('doctor', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Sneak"
+                        Label:
+                            id: sneak
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('sneak', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('sneak', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Lockpick"
+                        Label:
+                            id: lockpick
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('lockpick', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('lockpick', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Steal"
+                        Label:
+                            id: steal
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('steal', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('steal', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Traps"
+                        Label:
+                            id: traps
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('traps', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('traps', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Science"
+                        Label:
+                            id: science
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('science', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('science', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Repair"
+                        Label:
+                            id: repair
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('repair', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('repair', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Speech"
+                        Label:
+                            id: speech
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('speech', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('speech', 1)
+                            text: '+'
+                        Label:
+                            text: "Barter"
+                        Label:
+                            id: barter
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('barter', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('barter', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Gambling"
+                        Label:
+                            id: gambling
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('gambling', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('gambling', 1)
+                            text: '+'
+
+                        Label:
+                            text: "Outdoorsman"
+                        Label:
+                            id: outdoorsman
+                            text: "0"
+                        SkillButton:
+                            on_press: app.add_skill('outdoorsman', -1)
+                            text: '-'
+                        SkillButton:
+                            on_press: app.add_skill('outdoorsman', 1)
+                            text: '+'
+
+        AccordionItem:
+            title: 'Traits and Perks'
+            ScrollView:
+                GridLayout:
+                    height: self.minimum_height
+                    size_hint_y: None
+                    row_default_height: '32dp'
+                    row_force_default: True
+                    spacing: 0, 0
+                    padding: 30, 2
+                    cols: 1
+                    Label:
+                        text: '--TRAITS--'
+                    ToggleButton:
+                        id: trait_bloody_mess
+                        text: 'Bloody Mess'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_bonehead
+                        text: 'Bonehead'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_bruiser
+                        text: 'Bruiser'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    #ToggleButton:
+                    #    id: trait_chem_reliant
+                    #    text: 'Chem Reliant'
+                    #    size_hint_x: 0.8
+                    #    on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_chem_resistant
+                        text: 'Chem Resistant'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_fast_metabolism
+                        text: 'Fast Metabolism'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_fast_shot
+                        text: 'Fast Shot'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_finesse
+                        text: 'Finesse'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_good_natured
+                        text: 'Good Natured'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_heavy_handed
+                        text: 'Heavy Handed'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_jinxed
+                        text: 'Jinxed'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_kamikaze
+                        text: 'Kamikaze'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_loner
+                        text: 'Loner'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_one_hander
+                        text: 'One Hander'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_cannibal
+                        text: 'Cannibal'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_small_frame
+                        text: 'Small Frame'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+                    ToggleButton:
+                        id: trait_gifted
+                        text: 'Gifted'
+                        size_hint_x: 0.8
+                        on_state: app.add_trait(self)
+
+                    Label:
+                        text: '--SUPPORT PERKS--'
+                    #ToggleButton:
+                    #    id: perk_awareness
+                    #    text: 'Awareness'
+                    #    size_hint_x: 0.8
+                    #    on_state: app.add_perk(self)
+                    #    disabled: True
+                    ToggleButton:
+                        id: perk_cautious_nature
+                        text: 'Cautious Nature'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_dead_man_walking
+                        text: 'Dead Man Walking'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_demolition_expert
+                        text: 'Demolition Expert'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_dismantler
+                        text: 'Dismantler'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_explorer
+                        text: 'Explorer'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_faster_healing
+                        text: 'Faster Healing'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_educated
+                        text: 'Educated'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_harmless
+                        text: 'Harmless'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gecko_skinning
+                        text: 'Gecko Skinning'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_stealth_girl
+                        text: 'Stealth Girl'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_rad_resistance
+                        text: 'Rad Resistance'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_ranger
+                        text: 'Ranger'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_mr._fixit
+                        text: 'Mr. Fixit'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_negotiator
+                        text: 'Negotiator'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_pack_rat
+                        text: 'Pack Rat'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_pathfinder
+                        text: 'Pathfinder'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_pickpocket
+                        text: 'Pickpocket'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_master_thief
+                        text: 'Master Thief'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_magnetic_personality
+                        text: 'Magnetic Personality'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_light_step
+                        text: 'Light Step'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_scout
+                        text: 'Scout'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_sex_appeal
+                        text: 'Sex Appeal'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_snakeater
+                        text: 'Snakeater'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_speaker
+                        text: 'Speaker'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_strong_back
+                        text: 'Strong Back'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_swift_learner
+                        text: 'Swift Learner'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_thief
+                        text: 'Thief'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_treasure_hunter
+                        text: 'Treasure Hunter'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 3--'
+                    ToggleButton:
+                        id: perk_adrenaline_rush
+                        text: 'Adrenaline Rush'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_bonus_hth_damage
+                        text: 'Bonus HtH Damage'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_bonus_move
+                        text: 'Bonus Move'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_dodger
+                        text: 'Dodger'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_earlier_sequence
+                        text: 'Earlier Sequence'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_quick_pockets
+                        text: 'Quick Pockets'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_agility
+                        text: 'Gain Agility'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_charisma
+                        text: 'Gain Charisma'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_endurance
+                        text: 'Gain Endurance'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_intelligence
+                        text: 'Gain Intelligence'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_luck
+                        text: 'Gain Luck'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_perception
+                        text: 'Gain Perception'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_gain_strength
+                        text: 'Gain Strength'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_healer
+                        text: 'Healer'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_iron_grip
+                        text: 'Iron Grip'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_livewire
+                        text: 'Livewire'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_more_critical
+                        text: 'More Critical'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_quick_recovery
+                        text: 'Quick Recovery'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_weapon_handling
+                        text: 'Weapon Handling'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 6--'
+                    ToggleButton:
+                        id: perk_more_hth_criticals
+                        text: 'More HtH Criticals'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_even_more_criticals
+                        text: 'Even More Criticals'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_ghost
+                        text: 'Ghost'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_heave_ho!
+                        text: 'Heave Ho!'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_hth_evade
+                        text: 'HtH Evade'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_spray_and_pray
+                        text: 'Spray and Pray'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_toughness
+                        text: 'Toughness'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_tree_trunk_thighs
+                        text: 'Tree Trunk Thighs'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 9--'
+                    #ToggleButton:
+                    #    id: perk_blessed_are_the_weak
+                    #    text: 'Blessed Are the Weak'
+                    #    size_hint_x: 0.8
+                    #    on_state: app.add_perk(self)
+                    #    disabled: True
+                    ToggleButton:
+                        id: perk_bonus_ranged_damage
+                        text: 'Bonus Ranged Damage'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_dodger+
+                        text: 'Dodger+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_heave_ho!!
+                        text: 'Heave Ho!!'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_hth_evade+
+                        text: 'HtH Evade+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_in_your_face!
+                        text: 'In Your Face!'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_pyromaniac
+                        text: 'Pyromaniac'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_sharpshooter
+                        text: 'Sharpshooter'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_stonewall
+                        text: 'Stonewall'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_toughness+
+                        text: 'Toughness+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 12--'
+                    ToggleButton:
+                        id: perk_action_boy
+                        text: 'Action Boy'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_better_criticals
+                        text: 'Better Criticals'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_bonus_ranged_damage+
+                        text: 'Bonus Ranged Damage+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_hit_the_gaps
+                        text: 'Hit the Gaps'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_lifegiver
+                        text: 'Lifegiver'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_living_anatomy
+                        text: 'Living Anatomy'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 15--'
+                    ToggleButton:
+                        id: perk_better_hth_criticals
+                        text: 'Better HtH Criticals'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_lifegiver+
+                        text: 'Lifegiver+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_man_of_steel
+                        text: 'Man of Steel'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_medic
+                        text: 'Medic'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_more_ranged_damage
+                        text: 'More Ranged Damage'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_pyromaniac+
+                        text: 'Pyromaniac+'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_right_between_the_eyes
+                        text: 'Right between the Eyes'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_silent_death
+                        text: 'Silent Death'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_silent_running
+                        text: 'Silent Running'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--PERKS LEVEL 18--'
+                    ToggleButton:
+                        id: perk_bonus_hth_attacks
+                        text: 'Bonus HtH Attacks'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_bonus_rate_of_fire
+                        text: 'Bonus Rate of Fire'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_lifegiver++
+                        text: 'Lifegiver++'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    Label:
+                        text: '--CLASS PERKS--'
+                    ToggleButton:
+                        id: perk_bounty_hunter
+                        text: 'Bounty Hunter'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_chosen_one
+                        text: 'Chosen One'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_cyborg
+                        text: 'Cyborg'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_deathclaw_perk
+                        text: 'Deathclaw Perk'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_priest
+                        text: 'Priest'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_random_boy
+                        text: 'Random Boy'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_soldier
+                        text: 'Soldier'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_super_mutant
+                        text: 'Super Mutant'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_killer
+                        text: 'Killer'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+                    ToggleButton:
+                        id: perk_assassin
+                        text: 'Assassin'
+                        size_hint_x: 0.8
+                        on_state: app.add_perk(self)
+                        disabled: True
+
+
+        AccordionItem:
+            title: 'Special'
+            GridLayout:
+                id: special_grid
+                cols: 4
+                padding: 4
+                spacing: 2
+                SpecialLabel:
+                    text: 'STRENGTH:'
+                SpecialLabel:
+                    id: special_s
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: strength_minus
+                    on_release: app.add_special('S', -1)
+                    text: '-'
+                SpecialButton:
+                    id: strength_plus
+                    on_release: app.add_special('S', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'PERCEPTION:'
+                SpecialLabel:
+                    id: special_p
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: perception_minus
+                    on_release: app.add_special('P', -1)
+                    text: '-'
+                SpecialButton:
+                    id: perception_plus
+                    on_release: app.add_special('P', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'ENDURANCE:'
+                SpecialLabel:
+                    id: special_e
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: endurance_minus
+                    on_release: app.add_special('E', -1)
+                    text: '-'
+                SpecialButton:
+                    id: endurance_plus
+                    on_release: app.add_special('E', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'CHARISMA:'
+                SpecialLabel:
+                    id: special_c
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: charisma_minus
+                    on_release: app.add_special('C', -1)
+                    text: '-'
+                SpecialButton:
+                    id: charisma_plus
+                    on_release: app.add_special('C', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'INTELLIGENCE:'
+                SpecialLabel:
+                    id: special_i
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: intelligence_minus
+                    on_release: app.add_special('I', -1)
+                    text: '-'
+                SpecialButton:
+                    id: intelligence_plus
+                    on_release: app.add_special('I', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'AGILITY:'
+                SpecialLabel:
+                    id: special_a
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: agility_minus
+                    on_release: app.add_special('A', -1)
+                    text: '-'
+                SpecialButton:
+                    id: agility_plus
+                    on_release: app.add_special('A', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'LUCK:'
+                SpecialLabel:
+                    id: special_l
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+                SpecialButton:
+                    id: luck_minus
+                    on_release: app.add_special('L', -1)
+                    text: '-'
+                SpecialButton:
+                    id: luck_plus
+                    on_release: app.add_special('L', 1)
+                    text: '+'
+
+                SpecialLabel:
+                    text: 'Points Left:'
+                SpecialLabel:
+                    id: points_left
+                    text: '5'
+                    size_hint_x: None
+                    width:'40dp'
+

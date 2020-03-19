@@ -1,0 +1,71 @@
+[
+    {
+        "level": 1,
+        "min_special": 1,
+        "max_special": 10,
+        "special": {
+            "S": 5,
+            "P": 5,
+            "E": 5,
+            "C": 5,
+            "I": 5,
+            "A": 5,
+            "L": 5
+        },
+        "special_points": 5,
+        "perk_every_levels": 3,
+        "perk_points": 0,
+        "perks": {},
+        "class_perk": null,
+        "traits": [],
+        "head_crical_hit_tier": 0,
+        "crical_hit_tier": 0,
+        "crical_hit_inflict_tier": 0,
+        "critical_power": 0,
+        "critical_chance": 0,
+        "hth_critical_power": 0,
+        "hth_critical_chance": 0,
+        "per_bullet_dmg": 0,
+        "bonus_damage": 0,
+        "flat_damage": 0,
+        "flat_fire_damage": 0,
+        "melee_damage": 0,
+        "dr": {
+            "normal": 0,
+            "laser": 0,
+            "plasma": 0,
+            "fire": 0,
+            "explode": 0,
+            "electric": 0
+        },
+        "dt": {
+            "normal": 0,
+            "laser": 0,
+            "plasma": 0,
+            "fire": 0,
+            "explode": 0,
+            "electric": 0
+        },
+        "skill": {},
+        "skill_points": 0,
+        "read_books": {},
+        "read_books_points": {},
+        "bonus_skill_points": 0,
+        "drugs": [],
+        "max_drugs": 5,
+        "drug_duration": 30,
+        "bonus": {
+            "special": {}
+        },
+        "bonus_hit_points": 0,
+        "xp_bonus": 0,
+        "speed": 100,
+        "party_points": 0,
+        "rad_resist": 0,
+        "poision_resist": 0,
+        "carry_weight": 0,
+        "action_points": 0,
+        "armor_class": 0,
+        "sequence": 0
+    }
+]

@@ -1,0 +1,21 @@
+Beer;               pc.bonus.special.P-=2,  pc.dr.normal+=5, pc.bonus.special.C=+1
+Booze;              pc.bonus.special.P-=2,  pc.dr.laser+=5
+Buffout;            pc.bonus.special.S+=2, pc.bonus.special.A-=1, pc.bonus.special.E+=2
+Cigarettes;         pc.bonus.special.p+=1, pc.bonus.special.C-=1
+Cookie;             pc.action_points+=1
+Gamma Gulp Beer;    pc.bonus.special.p-=1, pc.dr.plasma+=5
+Healing Powder;     pc.healing_rate+=25, pc.bonus.special.L-=1
+Jet;                pc.action_points+=2, pc.dr.normal-=15, pc.bonus.special.C-=1, pc.bonus.special.S-=2
+Mentats;            pc.bonus.special.I+=2, pc.bonus.special.C+=2, pc.sequence+=10, pc.healing_rate-=10
+Nuka-Cola;          pc.bonus.special.A+=1, pc.bonus.special.E-=1
+Psycho;             pc.dr.normal+=15, pc.bonus.special.S+=1, pc.bonus.special.E+=1, pc.bonus.special.P-=2
+Roentgen Rum;       pc.bonus.special.P-=2, pc.dr.fire+=5
+Rot Gut;            pc.bonus.special.P-=2, pc.bonus.dr.explode+=5
+After Burner Gum;   pc.critical_chance+=10, pc.bonus.special.L-=5
+Mutie;              pc.dt.normal+=3, pc.dt.laser+=3, pc.dt.explode+=3, bonus.ap-=2
+Voodoo;             pc.bonus.special.L+=3, pc.bonus.special.E-=2, pc.bonus.special.S-=2
+Brain;              pc.bonus.special.I+=3, pc.speed+=5
+Eye;                pc.bonus.special.P+=3, pc.dr.laser+=15
+Ear;                pc.bonus.special.L+=4, pc.action_points+=2
+Heart;              pc.bonus.special.E+=4, pc.bonus_hit_points+=20
+Liver;              pc.bonus.special.S+=3, pc.dt.normal+=7
