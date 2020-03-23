@@ -1,5 +1,5 @@
 Bloody Mess;        pc.npc_kill_ap+=2, pc.pc_kill_ap+=2
-Bonehead;           pc.head_crical_hit_tier-=1, pc.special.I-=2
+Bonehead;           pc.head_crical_resist_tier-=1, pc.special.I-=2
 Bruiser;            pc.special.S+=4, pc.speed-=10
 Chem Resistant;     pc.max_drugs+=5, pc.drug_duration+=30
 Fast Metabolism;    pc.healing_rate+=10, pc.hr_cooldown-=10, pc.drug_duration-=15

@@ -125,9 +125,10 @@ pc.class_perk = None
 #trait
 pc.traits = []
 #criticals
-pc.head_crical_hit_tier = 0
-pc.crical_hit_tier = 0
-pc.crical_hit_inflict_tier = 0
+pc.head_crical_resist_tier = 0
+pc.crical_resist_tier = 0
+pc.crical_resist = 0
+pc.crical_power_tier = 0
 pc.critical_power=0
 pc.critical_chance=0
 pc.hth_critical_power=0
@@ -172,6 +173,7 @@ pc.implants_special = dotdict()
 pc.max_implants = 5
 pc.max_implants_special = 6
 #other?
+pc.healing_rate = 0
 pc.bonus_hit_points = 0
 pc.xp_bonus = 0
 pc.speed = 100
@@ -183,6 +185,7 @@ pc.action_points=0
 pc.armor_class =0
 pc.sequence=0
 pc.tb_move_ap=0
+pc.fov_bonus=0
 
 #Helper functions:
 
@@ -279,6 +282,19 @@ class PlanerApp(App):
                     id = idf(name)
                     effect = [i.strip() for i in line_as_list[1].split(',')]
                     self.known_drugs[id]={'name':name, 'effect':effect}
+        #load implants data
+        self.known_implants={}
+        with open('data/implants.txt') as infile:
+            for line in infile.readlines():
+                if not line.startswith('#'):
+                    #turn long str to list
+                    line_as_list = [i.strip() for i in line.split(';')]
+                    name = line_as_list[0]
+                    id = idf(name)
+                    effect_1 = [i.strip() for i in line_as_list[1].split(',')]
+                    effect_2 = [i.strip() for i in line_as_list[2].split(',')]
+                    effect_3 = [i.strip() for i in line_as_list[3].split(',')]
+                    self.known_implants[id]={'name':name, 'effect_1':effect_1, 'effect_2':effect_2, 'effect_3':effect_3}
 
     def _install_settings_keys(self, window):
         '''Added to disable Kivy F1 settings '''
@@ -699,6 +715,10 @@ class PlanerApp(App):
             pc.flat_damage+=1
             pc.crical_hit_tier += 1
             pc.crical_hit_inflict_tier +=1
+            for dt in pc.dt.values():
+                dt+=1
+            for dr in pc.dr.values():
+                dr+=1
             #more???
         elif perk =='random_boy':
             self.last_randomboy=self.roll_random_boy()
@@ -998,7 +1018,7 @@ class PlanerApp(App):
                 self.root.ids['perk_'+perk_id].disabled = True
                 if perk_id in pc.perks:
                     self.root.ids['perk_'+perk_id].state = 'down'
-                    if pc.perks[perk_id] == pc.level:
+                    if pc.perks[perk_id] == pc.level and perk_id not in self.known_perks_class:
                         self.root.ids['perk_'+perk_id].disabled = False
                 else:
                     self.root.ids['perk_'+perk_id].state = 'normal'
