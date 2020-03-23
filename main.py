@@ -125,10 +125,10 @@ pc.class_perk = None
 #trait
 pc.traits = []
 #criticals
-pc.head_crical_resist_tier = 0
-pc.crical_resist_tier = 0
-pc.crical_resist = 0
-pc.crical_power_tier = 0
+pc.head_critical_resist_tier = 0
+pc.critical_resist_tier = 0
+pc.critical_resist = 0
+pc.critical_power_tier = 0
 pc.critical_power=0
 pc.critical_chance=0
 pc.hth_critical_power=0
