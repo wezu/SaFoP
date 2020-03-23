@@ -7,7 +7,7 @@
     valign: 'center'
 
 <SpecialLabel@Label>:
-    font_size: '18dp'
+    font_size: '15dp'
 
 <SkillButton@Button>:
     width: '48dp'
@@ -17,7 +17,7 @@
 
 <SpecialButton@Button>:
     width: self.height
-    font_size: '30dp'
+    font_size: '24dp'
     size_hint_x: None
 
 <ScrollView>
@@ -51,6 +51,10 @@
 <PopupButton>
     height: '38dp'
     size_hint: 0.1, None
+
+#<TabbedPanelHeader>:
+#    width: 10
+#    size_hint_x: None
 
 BoxLayout:
     orientation: 'vertical'
@@ -86,7 +90,6 @@ BoxLayout:
             text: 'Exit'
             width: '70dp'
             size_hint_x:None
-            #disabled: True
     Accordion:
         orientation: 'horizontal'
 
@@ -1693,810 +1696,870 @@ BoxLayout:
                             text: '+'
 
         AccordionItem:
-            title: 'Traits and Perks'
-            ScrollView:
+            title: 'Perks'
+            TabbedPanel:
+                do_default_tab: False
+                tab_height: '34dp'
+                tab_width: '150dp'
+                TabbedPanelItem:
+                    text: 'Support Perks:'
+                    ScrollView:
+                        GridLayout:
+                            height: self.minimum_height
+                            size_hint_y: None
+                            row_default_height: '32dp'
+                            row_force_default: True
+                            spacing: 0, 0
+                            padding: 30, 2
+                            cols: 1
+
+                            ToggleButton:
+                                id: perk_cautious_nature
+                                text: 'Cautious Nature'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_dead_man_walking
+                                text: 'Dead Man Walking'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_demolition_expert
+                                text: 'Demolition Expert'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_dismantler
+                                text: 'Dismantler'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_explorer
+                                text: 'Explorer'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_faster_healing
+                                text: 'Faster Healing'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_educated
+                                text: 'Educated'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_harmless
+                                text: 'Harmless'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_gecko_skinning
+                                text: 'Gecko Skinning'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_stealth_girl
+                                text: 'Stealth Girl'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_rad_resistance
+                                text: 'Rad Resistance'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_ranger
+                                text: 'Ranger'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_mr._fixit
+                                text: 'Mr. Fixit'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_negotiator
+                                text: 'Negotiator'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_pack_rat
+                                text: 'Pack Rat'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_pathfinder
+                                text: 'Pathfinder'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_pickpocket
+                                text: 'Pickpocket'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_master_thief
+                                text: 'Master Thief'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_magnetic_personality
+                                text: 'Magnetic Personality'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_light_step
+                                text: 'Light Step'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_scout
+                                text: 'Scout'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_sex_appeal
+                                text: 'Sex Appeal'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_snakeater
+                                text: 'Snakeater'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_speaker
+                                text: 'Speaker'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_strong_back
+                                text: 'Strong Back'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_swift_learner
+                                text: 'Swift Learner'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_thief
+                                text: 'Thief'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_treasure_hunter
+                                text: 'Treasure Hunter'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                TabbedPanelItem:
+                    text: 'Level  Perks:'
+                    TabbedPanel:
+                        do_default_tab: False
+                        tab_width: '74dp'
+                        tab_height: '28dp'
+                        TabbedPanelItem:
+                            text: 'Lvl 3'
+                            text_size: self.size
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_adrenaline_rush
+                                        text: 'Adrenaline Rush'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_bonus_hth_damage
+                                        text: 'Bonus HtH Damage'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_bonus_move
+                                        text: 'Bonus Move'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_dodger
+                                        text: 'Dodger'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_earlier_sequence
+                                        text: 'Earlier Sequence'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_quick_pockets
+                                        text: 'Quick Pockets'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_agility
+                                        text: 'Gain Agility'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_charisma
+                                        text: 'Gain Charisma'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_endurance
+                                        text: 'Gain Endurance'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_intelligence
+                                        text: 'Gain Intelligence'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_luck
+                                        text: 'Gain Luck'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_perception
+                                        text: 'Gain Perception'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_gain_strength
+                                        text: 'Gain Strength'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_healer
+                                        text: 'Healer'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_iron_grip
+                                        text: 'Iron Grip'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_livewire
+                                        text: 'Livewire'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_more_critical
+                                        text: 'More Critical'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_quick_recovery
+                                        text: 'Quick Recovery'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_weapon_handling
+                                        text: 'Weapon Handling'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+
+                        TabbedPanelItem:
+                            text: 'Lvl 6'
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_more_hth_criticals
+                                        text: 'More HtH Criticals'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_even_more_criticals
+                                        text: 'Even More Criticals'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_ghost
+                                        text: 'Ghost'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_heave_ho!
+                                        text: 'Heave Ho!'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_hth_evade
+                                        text: 'HtH Evade'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_spray_and_pray
+                                        text: 'Spray and Pray'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_toughness
+                                        text: 'Toughness'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_tree_trunk_thighs
+                                        text: 'Tree Trunk Thighs'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                        TabbedPanelItem:
+                            text: 'Lvl 9'
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_bonus_ranged_damage
+                                        text: 'Bonus Ranged Damage'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_dodger+
+                                        text: 'Dodger+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_heave_ho!!
+                                        text: 'Heave Ho!!'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_hth_evade+
+                                        text: 'HtH Evade+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_in_your_face!
+                                        text: 'In Your Face!'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_pyromaniac
+                                        text: 'Pyromaniac'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_sharpshooter
+                                        text: 'Sharpshooter'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_stonewall
+                                        text: 'Stonewall'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_toughness+
+                                        text: 'Toughness+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                        TabbedPanelItem:
+                            text: 'Lvl 12'
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_action_boy
+                                        text: 'Action Boy'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_better_criticals
+                                        text: 'Better Criticals'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_bonus_ranged_damage+
+                                        text: 'Bonus Ranged Damage+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_hit_the_gaps
+                                        text: 'Hit the Gaps'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_lifegiver
+                                        text: 'Lifegiver'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_living_anatomy
+                                        text: 'Living Anatomy'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                        TabbedPanelItem:
+                            text: 'Lvl 15'
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_better_hth_criticals
+                                        text: 'Better HtH Criticals'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_lifegiver+
+                                        text: 'Lifegiver+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_man_of_steel
+                                        text: 'Man of Steel'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_medic
+                                        text: 'Medic'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_more_ranged_damage
+                                        text: 'More Ranged Damage'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_pyromaniac+
+                                        text: 'Pyromaniac+'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_right_between_the_eyes
+                                        text: 'Right between the Eyes'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_silent_death
+                                        text: 'Silent Death'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_silent_running
+                                        text: 'Silent Running'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                        TabbedPanelItem:
+                            text: 'Lvl 18'
+                            ScrollView:
+                                GridLayout:
+                                    height: self.minimum_height
+                                    size_hint_y: None
+                                    row_default_height: '32dp'
+                                    row_force_default: True
+                                    spacing: 0, 0
+                                    padding: 30, 2
+                                    cols: 1
+                                    ToggleButton:
+                                        id: perk_bonus_hth_attacks
+                                        text: 'Bonus HtH Attacks'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_bonus_rate_of_fire
+                                        text: 'Bonus Rate of Fire'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                                    ToggleButton:
+                                        id: perk_lifegiver++
+                                        text: 'Lifegiver++'
+                                        size_hint_x: 0.8
+                                        on_state: app.add_perk(self)
+                                        disabled: True
+                TabbedPanelItem:
+                    text: 'Class  Perks:'
+                    ScrollView:
+                        GridLayout:
+                            height: self.minimum_height
+                            size_hint_y: None
+                            row_default_height: '32dp'
+                            row_force_default: True
+                            spacing: 0, 0
+                            padding: 30, 2
+                            cols: 1
+                            ToggleButton:
+                                id: perk_bounty_hunter
+                                text: 'Bounty Hunter'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_chosen_one
+                                text: 'Chosen One'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_cyborg
+                                text: 'Cyborg'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_deathclaw_perk
+                                text: 'Deathclaw Perk'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_priest
+                                text: 'Priest'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_random_boy
+                                text: 'Random Boy'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_soldier
+                                text: 'Soldier'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_super_mutant
+                                text: 'Super Mutant'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_killer
+                                text: 'Killer'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+                            ToggleButton:
+                                id: perk_assassin
+                                text: 'Assassin'
+                                size_hint_x: 0.8
+                                on_state: app.add_perk(self)
+                                disabled: True
+
+        AccordionItem:
+            title: 'Traits and Special'
+            BoxLayout:
                 GridLayout:
-                    height: self.minimum_height
-                    size_hint_y: None
-                    row_default_height: '32dp'
-                    row_force_default: True
-                    spacing: 0, 0
-                    padding: 30, 2
-                    cols: 1
-                    Label:
-                        text: '--TRAITS--'
+                    id: special_grid
+                    cols: 4
+                    padding: 2
+                    spacing: 1
+
+                    SpecialLabel:
+                        text: 'STRENGTH:'
+                    SpecialLabel:
+                        id: special_s
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: strength_minus
+                        on_release: app.add_special('S', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: strength_plus
+                        on_release: app.add_special('S', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'PERCEPTION:'
+                    SpecialLabel:
+                        id: special_p
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: perception_minus
+                        on_release: app.add_special('P', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: perception_plus
+                        on_release: app.add_special('P', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'ENDURANCE:'
+                    SpecialLabel:
+                        id: special_e
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: endurance_minus
+                        on_release: app.add_special('E', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: endurance_plus
+                        on_release: app.add_special('E', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'CHARISMA:'
+                    SpecialLabel:
+                        id: special_c
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: charisma_minus
+                        on_release: app.add_special('C', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: charisma_plus
+                        on_release: app.add_special('C', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'INTELLIGENCE:'
+                    SpecialLabel:
+                        id: special_i
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: intelligence_minus
+                        on_release: app.add_special('I', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: intelligence_plus
+                        on_release: app.add_special('I', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'AGILITY:'
+                    SpecialLabel:
+                        id: special_a
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: agility_minus
+                        on_release: app.add_special('A', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: agility_plus
+                        on_release: app.add_special('A', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'LUCK:'
+                    SpecialLabel:
+                        id: special_l
+                        text: '5'
+                        size_hint_x: None
+                        width:'20dp'
+                    SpecialButton:
+                        id: luck_minus
+                        on_release: app.add_special('L', -1)
+                        text: '-'
+                    SpecialButton:
+                        id: luck_plus
+                        on_release: app.add_special('L', 1)
+                        text: '+'
+                    SpecialLabel:
+                        text: 'Points Left:'
+                    SpecialLabel:
+                        id: points_left
+                        text: '5'
+                        size_hint_x: None
+                        width:'40dp'
+                GridLayout:
+                    size_hint_x: 0.9
+                    id: traits_grid
+                    cols: 2
+                    padding: 0, 8
+                    spacing: 1, 2
                     ToggleButton:
                         id: trait_bloody_mess
                         text: 'Bloody Mess'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_bonehead
                         text: 'Bonehead'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_bruiser
                         text: 'Bruiser'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     #ToggleButton:
                     #    id: trait_chem_reliant
                     #    text: 'Chem Reliant'
-                    #    size_hint_x: 0.8
+                    #    font_size: '14dp'
                     #    on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_chem_resistant
                         text: 'Chem Resistant'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_fast_metabolism
                         text: 'Fast Metabolism'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_fast_shot
                         text: 'Fast Shot'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_finesse
                         text: 'Finesse'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_good_natured
                         text: 'Good Natured'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_heavy_handed
                         text: 'Heavy Handed'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_jinxed
                         text: 'Jinxed'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_kamikaze
                         text: 'Kamikaze'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_loner
                         text: 'Loner'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_one_hander
                         text: 'One Hander'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_cannibal
                         text: 'Cannibal'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_small_frame
                         text: 'Small Frame'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
                     ToggleButton:
                         id: trait_gifted
                         text: 'Gifted'
-                        size_hint_x: 0.8
+                        font_size: '14dp'
                         on_state: app.add_trait(self)
-
-                    Label:
-                        text: '--SUPPORT PERKS--'
-                    #ToggleButton:
-                    #    id: perk_awareness
-                    #    text: 'Awareness'
-                    #    size_hint_x: 0.8
-                    #    on_state: app.add_perk(self)
-                    #    disabled: True
-                    ToggleButton:
-                        id: perk_cautious_nature
-                        text: 'Cautious Nature'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_dead_man_walking
-                        text: 'Dead Man Walking'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_demolition_expert
-                        text: 'Demolition Expert'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_dismantler
-                        text: 'Dismantler'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_explorer
-                        text: 'Explorer'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_faster_healing
-                        text: 'Faster Healing'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_educated
-                        text: 'Educated'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_harmless
-                        text: 'Harmless'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gecko_skinning
-                        text: 'Gecko Skinning'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_stealth_girl
-                        text: 'Stealth Girl'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_rad_resistance
-                        text: 'Rad Resistance'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_ranger
-                        text: 'Ranger'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_mr._fixit
-                        text: 'Mr. Fixit'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_negotiator
-                        text: 'Negotiator'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_pack_rat
-                        text: 'Pack Rat'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_pathfinder
-                        text: 'Pathfinder'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_pickpocket
-                        text: 'Pickpocket'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_master_thief
-                        text: 'Master Thief'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_magnetic_personality
-                        text: 'Magnetic Personality'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_light_step
-                        text: 'Light Step'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_scout
-                        text: 'Scout'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_sex_appeal
-                        text: 'Sex Appeal'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_snakeater
-                        text: 'Snakeater'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_speaker
-                        text: 'Speaker'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_strong_back
-                        text: 'Strong Back'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_swift_learner
-                        text: 'Swift Learner'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_thief
-                        text: 'Thief'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_treasure_hunter
-                        text: 'Treasure Hunter'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 3--'
-                    ToggleButton:
-                        id: perk_adrenaline_rush
-                        text: 'Adrenaline Rush'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_bonus_hth_damage
-                        text: 'Bonus HtH Damage'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_bonus_move
-                        text: 'Bonus Move'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_dodger
-                        text: 'Dodger'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_earlier_sequence
-                        text: 'Earlier Sequence'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_quick_pockets
-                        text: 'Quick Pockets'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_agility
-                        text: 'Gain Agility'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_charisma
-                        text: 'Gain Charisma'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_endurance
-                        text: 'Gain Endurance'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_intelligence
-                        text: 'Gain Intelligence'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_luck
-                        text: 'Gain Luck'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_perception
-                        text: 'Gain Perception'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_gain_strength
-                        text: 'Gain Strength'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_healer
-                        text: 'Healer'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_iron_grip
-                        text: 'Iron Grip'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_livewire
-                        text: 'Livewire'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_more_critical
-                        text: 'More Critical'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_quick_recovery
-                        text: 'Quick Recovery'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_weapon_handling
-                        text: 'Weapon Handling'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 6--'
-                    ToggleButton:
-                        id: perk_more_hth_criticals
-                        text: 'More HtH Criticals'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_even_more_criticals
-                        text: 'Even More Criticals'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_ghost
-                        text: 'Ghost'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_heave_ho!
-                        text: 'Heave Ho!'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_hth_evade
-                        text: 'HtH Evade'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_spray_and_pray
-                        text: 'Spray and Pray'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_toughness
-                        text: 'Toughness'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_tree_trunk_thighs
-                        text: 'Tree Trunk Thighs'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 9--'
-                    #ToggleButton:
-                    #    id: perk_blessed_are_the_weak
-                    #    text: 'Blessed Are the Weak'
-                    #    size_hint_x: 0.8
-                    #    on_state: app.add_perk(self)
-                    #    disabled: True
-                    ToggleButton:
-                        id: perk_bonus_ranged_damage
-                        text: 'Bonus Ranged Damage'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_dodger+
-                        text: 'Dodger+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_heave_ho!!
-                        text: 'Heave Ho!!'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_hth_evade+
-                        text: 'HtH Evade+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_in_your_face!
-                        text: 'In Your Face!'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_pyromaniac
-                        text: 'Pyromaniac'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_sharpshooter
-                        text: 'Sharpshooter'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_stonewall
-                        text: 'Stonewall'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_toughness+
-                        text: 'Toughness+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 12--'
-                    ToggleButton:
-                        id: perk_action_boy
-                        text: 'Action Boy'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_better_criticals
-                        text: 'Better Criticals'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_bonus_ranged_damage+
-                        text: 'Bonus Ranged Damage+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_hit_the_gaps
-                        text: 'Hit the Gaps'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_lifegiver
-                        text: 'Lifegiver'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_living_anatomy
-                        text: 'Living Anatomy'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 15--'
-                    ToggleButton:
-                        id: perk_better_hth_criticals
-                        text: 'Better HtH Criticals'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_lifegiver+
-                        text: 'Lifegiver+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_man_of_steel
-                        text: 'Man of Steel'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_medic
-                        text: 'Medic'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_more_ranged_damage
-                        text: 'More Ranged Damage'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_pyromaniac+
-                        text: 'Pyromaniac+'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_right_between_the_eyes
-                        text: 'Right between the Eyes'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_silent_death
-                        text: 'Silent Death'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_silent_running
-                        text: 'Silent Running'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--PERKS LEVEL 18--'
-                    ToggleButton:
-                        id: perk_bonus_hth_attacks
-                        text: 'Bonus HtH Attacks'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_bonus_rate_of_fire
-                        text: 'Bonus Rate of Fire'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_lifegiver++
-                        text: 'Lifegiver++'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    Label:
-                        text: '--CLASS PERKS--'
-                    ToggleButton:
-                        id: perk_bounty_hunter
-                        text: 'Bounty Hunter'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_chosen_one
-                        text: 'Chosen One'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_cyborg
-                        text: 'Cyborg'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_deathclaw_perk
-                        text: 'Deathclaw Perk'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_priest
-                        text: 'Priest'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_random_boy
-                        text: 'Random Boy'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_soldier
-                        text: 'Soldier'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_super_mutant
-                        text: 'Super Mutant'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_killer
-                        text: 'Killer'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-                    ToggleButton:
-                        id: perk_assassin
-                        text: 'Assassin'
-                        size_hint_x: 0.8
-                        on_state: app.add_perk(self)
-                        disabled: True
-
-
-        AccordionItem:
-            title: 'Special'
-            GridLayout:
-                id: special_grid
-                cols: 4
-                padding: 4
-                spacing: 2
-                SpecialLabel:
-                    text: 'STRENGTH:'
-                SpecialLabel:
-                    id: special_s
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: strength_minus
-                    on_release: app.add_special('S', -1)
-                    text: '-'
-                SpecialButton:
-                    id: strength_plus
-                    on_release: app.add_special('S', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'PERCEPTION:'
-                SpecialLabel:
-                    id: special_p
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: perception_minus
-                    on_release: app.add_special('P', -1)
-                    text: '-'
-                SpecialButton:
-                    id: perception_plus
-                    on_release: app.add_special('P', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'ENDURANCE:'
-                SpecialLabel:
-                    id: special_e
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: endurance_minus
-                    on_release: app.add_special('E', -1)
-                    text: '-'
-                SpecialButton:
-                    id: endurance_plus
-                    on_release: app.add_special('E', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'CHARISMA:'
-                SpecialLabel:
-                    id: special_c
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: charisma_minus
-                    on_release: app.add_special('C', -1)
-                    text: '-'
-                SpecialButton:
-                    id: charisma_plus
-                    on_release: app.add_special('C', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'INTELLIGENCE:'
-                SpecialLabel:
-                    id: special_i
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: intelligence_minus
-                    on_release: app.add_special('I', -1)
-                    text: '-'
-                SpecialButton:
-                    id: intelligence_plus
-                    on_release: app.add_special('I', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'AGILITY:'
-                SpecialLabel:
-                    id: special_a
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: agility_minus
-                    on_release: app.add_special('A', -1)
-                    text: '-'
-                SpecialButton:
-                    id: agility_plus
-                    on_release: app.add_special('A', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'LUCK:'
-                SpecialLabel:
-                    id: special_l
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-                SpecialButton:
-                    id: luck_minus
-                    on_release: app.add_special('L', -1)
-                    text: '-'
-                SpecialButton:
-                    id: luck_plus
-                    on_release: app.add_special('L', 1)
-                    text: '+'
-
-                SpecialLabel:
-                    text: 'Points Left:'
-                SpecialLabel:
-                    id: points_left
-                    text: '5'
-                    size_hint_x: None
-                    width:'40dp'
-
