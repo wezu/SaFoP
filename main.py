@@ -171,6 +171,7 @@ pc.bonus.special = dotdict()
 pc.implants = dotdict()
 pc.implants_special = dotdict()
 pc.max_implants = 5
+pc.max_implant_level = 2
 pc.max_implants_special = 6
 #other?
 pc.healing_rate = 0
@@ -689,6 +690,12 @@ class PlanerApp(App):
             pc.dt.plasma+=5+pc.special.L+pc.bonus.special.L
             pc.dt.explode+=6+pc.special.A+pc.bonus.special.A
             pc.dt.electric+=3+pc.special.P+pc.bonus.special.P
+
+            #2x melee dmg - but calculated with current stats
+            #we just calc melee damage and add it as melee damage
+            base_melee_dmg= max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
+            pc.melee_damage+=pc.melee_damage+base_melee_dmg
+
         elif perk == 'soldier':
             pc.special.S+=1
             pc.special.P+=1
@@ -713,8 +720,8 @@ class PlanerApp(App):
             pc.max_implants +=1
             pc.max_implants_special += 1
             pc.flat_damage+=1
-            pc.crical_hit_tier += 1
-            pc.crical_hit_inflict_tier +=1
+            pc.critical_power_tier += 1
+            pc.critical_power+=1
             for dt in pc.dt.values():
                 dt+=1
             for dr in pc.dr.values():
@@ -790,7 +797,7 @@ class PlanerApp(App):
         #update labels
         self._update_special()
         self._update_perks()
-
+        self.enable_implants()
 
     def add_trait(self, button):
         '''Adds or removes a trait.
@@ -948,11 +955,14 @@ class PlanerApp(App):
         if level > pc.implants_special[spec]:
             pc.implants_special[spec]+=1
             pc.special[spec]+=1
+            button = self.root.ids['implant_special_'+str(level)+'_'+spec]
+            button.disabled = True
         else:
             pc.implants_special[spec]-=1
             pc.special[spec]-=1
-            button = self.root.ids['implant_special_'+str(level+1)+'_'+spec]
-            button.disabled = True
+            if level < 12:
+                button = self.root.ids['implant_special_'+str(level+1)+'_'+spec]
+                button.disabled = True
         self.enable_implants()
 
     def add_implant(self, impl, level):
@@ -960,24 +970,55 @@ class PlanerApp(App):
         ## TODO
         if self.refresh_mode:
             return
-        print(impl, level)
+        if level > pc.implants[impl]:
+            pc.implants[impl]+=1
+            for cmd in self.known_implants[impl]['effect_'+str(level)]:
+                exec(cmd)
+        else:
+            pc.implants[impl]-=1
+            for cmd in self.known_implants[impl]['effect_'+str(level)]:
+                exec(anti_cmd(cmd))
+        self.enable_implants()
 
 
     def enable_implants(self):
-        #special implants
-        installed_implants= sum(pc.implants_special.values())
-        if installed_implants >= pc.max_implants_special:
-            for widget_id, widget in self.root.ids.items():
-                if widget_id.startswith('implant_special_'):
-                    widget.disabled = True
+        '''Enable or disable implant installation '''
+        #Disable all
+        for widget_id, widget in self.root.ids.items():
+            if widget_id.startswith('implant_'):
+                widget.disabled = True
+        if pc.level<30:
             return
-        for spec in 'SPECIAL':
-            if pc.special[spec]<20 :
-                num_implants = pc.implants_special[spec]
-                if num_implants < pc.max_implants_special:
-                    button = self.root.ids['implant_special_'+str(num_implants+1)+'_'+spec]
-                    button.disabled = False
+        #Enable new
+        # special implants
+        installed_implants= sum(pc.implants_special.values())
+        if installed_implants < pc.max_implants_special:
+            for spec in 'SPECIAL':
+                if pc.special[spec]<20 :
+                    num_implants = pc.implants_special[spec]
+                    if num_implants < pc.max_implants_special:
+                        button = self.root.ids['implant_special_'+str(num_implants+1)+'_'+spec]
+                        button.disabled = False
+        #combat implants
+        installed_implants= sum(pc.implants.values())
+        if installed_implants < pc.max_implants:
+            for implant_id in self.known_implants:
+                num_implants = pc.implants[implant_id]
+                if num_implants < pc.max_implants:
+                    if num_implants < pc.max_implant_level:
+                        button = self.root.ids['implant_'+implant_id+'_'+str(num_implants+1)]
+                        button.disabled = False
 
+        #for cyborg enable uninstalling implants
+        if pc.class_perk == 'cyborg':
+            for spec, value in pc.implants_special.items():
+                if value > 0:
+                    button = self.root.ids['implant_special_'+str(value)+'_'+spec]
+                    button.disabled = False
+            for implant_id, value in pc.implants.items():
+                if value > 0:
+                    button = self.root.ids['implant_'+implant_id+'_'+str(value)]
+                    button.disabled = False
 
     def refresh_all(self):
         '''Refresh UI without changing any inner values'''
@@ -1036,8 +1077,20 @@ class PlanerApp(App):
             elif num_drugs >= pc.max_drugs:
                 if prefix+drug_id in self.root.ids:
                     self.root.ids[prefix+drug_id].disabled = True
-        #implants?
-        ## TODO
+        #implants
+        for widget_id, widget in self.root.ids.items():
+            if widget_id.startswith('implant_'):
+                widget.disabled = True
+                widget.state = 'normal'
+        for spec, value in pc.implants_special.items():
+            for i in range(1, value+1):
+                button = self.root.ids['implant_special_'+str(i)+'_'+spec]
+                button.state = 'down'
+        for implant_id, value in pc.implants.items():
+            for i in range(1, value+1):
+                button = self.root.ids['implant_'+implant_id+'_'+str(i)]
+                button.state = 'down'
+        self.enable_implants()
         self.refresh_mode = False
         self.update_stats()
         if pc.level == 1:
