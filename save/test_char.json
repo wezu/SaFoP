@@ -18,9 +18,10 @@
         "perks": {},
         "class_perk": null,
         "traits": [],
-        "head_crical_hit_tier": 0,
-        "crical_hit_tier": 0,
-        "crical_hit_inflict_tier": 0,
+        "head_critical_resist_tier": 0,
+        "critical_resist_tier": 0,
+        "critical_resist": 0,
+        "critical_power_tier": 0,
         "critical_power": 0,
         "critical_chance": 0,
         "hth_critical_power": 0,
@@ -57,6 +58,12 @@
         "bonus": {
             "special": {}
         },
+        "implants": {},
+        "implants_special": {},
+        "max_implants": 5,
+        "max_implant_level": 2,
+        "max_implants_special": 6,
+        "healing_rate": 0,
         "bonus_hit_points": 0,
         "xp_bonus": 0,
         "speed": 100,
@@ -66,6 +73,8 @@
         "carry_weight": 0,
         "action_points": 0,
         "armor_class": 0,
-        "sequence": 0
+        "sequence": 0,
+        "tb_move_ap": 0,
+        "fov_bonus": 0
     }
 ]
