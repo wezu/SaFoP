@@ -1,7 +1,7 @@
 Beer;               pc.bonus.special.P-=2,  pc.dr.normal+=5, pc.bonus.special.C=+1
 Booze;              pc.bonus.special.P-=2,  pc.dr.laser+=5
 Buffout;            pc.bonus.special.S+=2, pc.bonus.special.A-=1, pc.bonus.special.E+=2
-Cigarettes;         pc.bonus.special.p+=1, pc.bonus.special.C-=1
+Cigarettes;         pc.bonus.special.P+=1, pc.bonus.special.C-=1
 Cookie;             pc.action_points+=1
 Gamma Gulp Beer;    pc.bonus.special.p-=1, pc.dr.plasma+=5
 Healing Powder;     pc.healing_rate+=25, pc.bonus.special.L-=1
