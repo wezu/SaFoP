@@ -133,6 +133,8 @@ pc.critical_power=0
 pc.critical_chance=0
 pc.hth_critical_power=0
 pc.hth_critical_chance=0
+#base hit points
+pc.hit_points = 0
 #extra dmg
 pc.per_bullet_dmg=0
 pc.bonus_damage=0
@@ -418,7 +420,9 @@ class PlanerApp(App):
         else:
             self.root.ids.level_up.disabled = True
             self.root.ids.level_up_all.disabled = True
+        #update starting values for skills and hp
         self._update_start_skills()
+        pc.hit_points = 65 + pc.special.S + pc.special.E
 
     def _update_perks(self):
         '''Check if the character meets requirements for perks.
@@ -440,12 +444,6 @@ class PlanerApp(App):
             for perk_id, perk in self.known_perks_class.items():
                 if perk['level']<=pc.level and self.root.ids['perk_'+perk_id].state=='normal':
                     self.root.ids['perk_'+perk_id].disabled = False
-
-    def get_hp(self):
-        '''Returns max hp for the current level '''
-        ## TODO
-        hp = 65+pc.special.S + pc.special.E
-        return '??? Fuck if I knew.'
 
     def get_carry_weight(self):
         '''Returns the max carry weight '''
@@ -504,7 +502,7 @@ class PlanerApp(App):
             text+=' None\n'
         else:
             text+=' '+self.known_perks_class[pc.class_perk]['name']+'\n'
-        text+='\nHit Points:\n '+str(self.get_hp())+'\n'
+        text+='\nHit Points:\n '+str(pc.hit_points+pc.bonus_hit_points)+'\n'
         text+='\nAction Points:\n '+str(5+(pc.special.A+pc.bonus.special.A)//2+pc.action_points)+'\n'
         sight_range = 20+(pc.special.P+pc.bonus.special.P)*3 + pc.view_range
         text+='\nView Range:\n'
@@ -512,14 +510,39 @@ class PlanerApp(App):
         text+=' -Forward-side: '+str(sight_range-3)+'\n'
         text+=' -Back-side:    '+str(sight_range-11)+'\n'
         text+=' -Back:         '+str(sight_range-14)+'\n'
+        text+='\nDetect sneak (300) at range:\n'
+        text+=' -Front:        '+str(max(3, sight_range-(300-72)//6))+'\n'
+        text+=' -Forward-side: '+str(max(3, sight_range-(300-36)//6))+'\n'
+        text+=' -Back-side:    '+str(max(3, sight_range-(300-12)//6))+'\n'
+        text+=' -Back:         '+str(max(3, sight_range-(300)//6))+'\n'
 
-        text+='\nCritical Chance:\n '
-        text+=str((pc.special.L+pc.bonus.special.L)+pc.critical_chance)
-        text+='% (melee: '+str((pc.special.L+pc.bonus.special.L)+pc.hth_critical_chance)+'%)\n'
+        text+='\nDetected when sneaking (front):\n'
+        text+='-vs 1 PE:    '+ str( max(3, (20+1*3)-((pc.skill.sneak-72)//6)) )+'\n'
+        text+='-vs 5 PE:    '+ str( max(3, (20+5*3)-((pc.skill.sneak-72)//6)) )+'\n'
+        text+='-vs 10 PE:   '+ str( max(3, (20+10*3)-((pc.skill.sneak-72)//6)) )+'\n'
+        text+='-vs 15 PE:   '+ str( max(3, (20+15*3)-((pc.skill.sneak-72)//6)) )+'\n'
+        text+='-vs 20 PE:   '+ str( max(3, (20+20*3)-((pc.skill.sneak-72)//6)) )+'\n'
+
+
+        text+='\nCritical Chance: (ranged/melee)\n'
+        base_cc = (pc.special.L+pc.bonus.special.L)+pc.critical_chance
+        base_cc_melee = (pc.special.L+pc.bonus.special.L)+pc.hth_critical_chance
+        text+=' -Unaimed:    '+str(base_cc)+'% / '+str(base_cc_melee)+'%\n'
+        aim_bonus = 60 * (60 + 4 * pc.special.L) // 100
+        text+=' -Eye:        '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
+        aim_bonus = 40 * (60 + 4 * pc.special.L) // 100
+        text+=' -Head:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
+        aim_bonus = 30 * (60 + 4 * pc.special.L) // 100
+        text+=' -Groin:      '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
+        aim_bonus = 30 * (60 + 4 * pc.special.L) // 100
+        text+=' -Arms:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
+        aim_bonus = 20 * (60 + 4 * pc.special.L) // 100
+        text+=' -Legs:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
+
         text+='\nCritical Power:\n '
         text+=str((pc.special.L+pc.bonus.special.L)+pc.critical_power)
 
-        text+='% (melee: '+str((pc.special.L+pc.bonus.special.L)+pc.hth_critical_power)+'%)\n'
+        text+=' (melee: '+str((pc.special.L+pc.bonus.special.L)+pc.hth_critical_power)+')\n'
         text+='\nCarry Weight:\n '+str(self.get_carry_weight())+'kg\n'
         text+='\nSequence:\n '+str((pc.special.P+pc.bonus.special.P)*2+pc.sequence)+'\n'
         melee_dmg = max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
@@ -695,7 +718,8 @@ class PlanerApp(App):
             #we just calc melee damage and add it as melee damage
             base_melee_dmg= max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
             pc.melee_damage+=pc.melee_damage+base_melee_dmg
-
+            #speed bonus
+            pc.speed+=10
         elif perk == 'soldier':
             pc.special.S+=1
             pc.special.P+=1
@@ -749,7 +773,9 @@ class PlanerApp(App):
             scroll.add_widget(grid)
             self.popup.add_widget(scroll)
             self.popup.open()
-
+        elif perk == 'mutant':
+            pc.special.E+=3
+            pc.hit_points+=pc.hit_points+pc.bonus_hit_points+100
 
     def add_perk(self, button):
         '''Adds or removes a perk.
@@ -967,7 +993,6 @@ class PlanerApp(App):
 
     def add_implant(self, impl, level):
         '''Add/Remove combat implants'''
-        ## TODO
         if self.refresh_mode:
             return
         if level > pc.implants[impl]:
@@ -1184,7 +1209,15 @@ class PlanerApp(App):
                     widget.disabled = False
             #enable level down
             self.root.ids.level_restore.disabled = False
+        #give level
         pc.level += 1
+        #give hp
+        if pc.level<= 29:
+            if pc.special.E%2 == 1 and pc.level%2 == 1:
+                pc.hit_points+=1
+            pc.hit_points+= pc.special.E//2
+        elif pc.level < 100 and pc.level%2 == 0:
+                pc.hit_points+=1
         #enable implants
         if pc.level>= 30:
             self.enable_implants()
@@ -1208,7 +1241,8 @@ class PlanerApp(App):
             self.root.ids['perk_'+perk_id].disabled = True
         #update level label
         self.root.ids.level_label.text = 'Level: '+str(pc.level)
-
+        #update stats
+        self.update_stats()
         #level up to next perk or class perk level
         if to_perk:
             if pc.level>120:
