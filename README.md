@@ -22,7 +22,7 @@ To run the program type in `python main.py` after navigating to the directory wh
 ## Binary for windows
 You can get a pre-build binary for Windows here (You won't need Python nor Kivy to run it):
 
-https://github.com/wezu/SaFoP/releases/download/0.2/safop_v03.zip
+https://github.com/wezu/SaFoP/releases/download/0.21/safop_v021.zip
 
 It is made using PyInstaller, so most likely marked as a virus by some crappy anti-virus, and/or Chrome. Can't be helped.
 
