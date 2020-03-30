@@ -22,6 +22,7 @@ Config.set('graphics', 'width', '700')
 Config.set('graphics', 'height', '400')
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 Config.set('kivy', 'exit_on_escape', '0')
+Config.set('kivy','window_icon','data/icon-32.png')
 
 from kivy.clock import Clock
 from kivy.app import App
