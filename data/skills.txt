@@ -1,17 +1,17 @@
 Small Guns;     300;    5+pc.special.A*4
 Big Guns;       300;    pc.special.A*2
-Energy Weapons; 300;    10+pc.special.A     
+Energy Weapons; 300;    10+pc.special.A
 Close Combat;   300;    30+(pc.special.A+pc.special.S)*2
-Throwing;       300;    40+pc.special.A    
-First Aid;      200;    40+(pc.special.P+pc.special.I)//2 
-Doctor;         200;    15+(pc.special.P+pc.special.I)//2 
-Sneak;          300;    5+pc.special.A*3 
-Lockpick;       200;    10+pc.special.P+pc.special.A 
-Steal;          150;    pc.special.A*3 
-Traps;          150;    20+(pc.special.P+pc.special.I)//2 
-Science;        200;    25+pc.special.I*2 
-Repair;         200;    20+pc.special.I 
-Speech;         300;    25+pc.special.C*2 
-Barter;         150;    25+pc.special.C*2      
+Throwing;       300;    pc.special.A*4
+First Aid;      200;    (pc.special.P+pc.special.I)*2
+Doctor;         200;    5+pc.special.P+pc.special.I
+Sneak;          300;    5+pc.special.A*3
+Lockpick;       200;    10+pc.special.P+pc.special.A
+Steal;          150;    pc.special.A*3
+Traps;          150;    10+pc.special.P+pc.special.A
+Science;        200;    pc.special.I*4
+Repair;         200;    pc.special.I*3
+Speech;         300;    pc.special.C*5
+Barter;         150;    pc.special.C*4
 Gambling;       150;    pc.special.L*5
-Outdoorsman;    175;    5+(pc.special.I+pc.special.E)//2 
+Outdoorsman;    175;    (pc.special.I+pc.special.E)*2
