@@ -968,11 +968,15 @@ class PlanerApp(App):
             self._last_amount = 0
 
     def _toggle_cannibal_drugs(self):
+        self.refresh_mode=True
         for widget_id, widget in self.root.ids.items():
             if widget_id.startswith('cannibal_drug_'):
                 widget.disabled = 'cannibal' not in pc.traits
+                widget.state = 'normal'
             elif widget_id.startswith('drug_'):
                 widget.disabled = 'cannibal' in pc.traits
+                widget.state = 'normal'
+        self.refresh_mode=False
 
     def add_special_implant(self, spec, level):
         '''Add/Remove special implants '''
