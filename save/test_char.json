@@ -26,6 +26,7 @@
         "critical_chance": 0,
         "hth_critical_power": 0,
         "hth_critical_chance": 0,
+        "hit_points": 0,
         "per_bullet_dmg": 0,
         "bonus_damage": 0,
         "flat_damage": 0,
