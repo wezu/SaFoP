@@ -1,6 +1,8 @@
 # SaFoP
 Standalone Fonline Planer
 
+![screenshot](https://raw.githubusercontent.com/wezu/SaFoP/master/screenshot.png)
+
 ## How to run?
 To run this program you will need to install Python and Kivy.
 
@@ -22,7 +24,7 @@ To run the program type in `python main.py` after navigating to the directory wh
 ## Binary for windows
 You can get a pre-build binary for Windows here (You won't need Python nor Kivy to run it):
 
-https://github.com/wezu/SaFoP/releases/download/0.21/safop_v021.zip
+https://github.com/wezu/SaFoP/releases/download/1.0/safop_v1.0.zip
 
 It is made using PyInstaller, so most likely marked as a virus by some crappy anti-virus, and/or Chrome. Can't be helped.
 
