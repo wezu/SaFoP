@@ -884,15 +884,36 @@ class PlanerApp(App):
         pc.read_books[skill]+=1
         pc.read_books_points[skill]+=6
         value = pc.skill[skill]
+        print(value, '>')
         if self.known_skills[skill]['limit'] <= value:
             return
-        cost = skill_cost(value+1)
-        while cost <= pc.read_books_points[skill]:
-            pc.skill[skill]+=1
-            pc.read_books_points[skill]-=cost
-            self.root.ids[skill].text = str(pc.skill[skill])
-            cost = skill_cost(pc.skill[skill]+1)
+        #mimic books.fos
+        sp=pc.read_books_points[skill]
+        while(sp>0):
+            if value >150 and sp>3:
+                pc.skill[skill]+=1
+                sp=0
+            elif value >150 and sp>2:
+                pc.skill[skill]+=1
+                sp-=3
+            elif value >100 and sp>1:
+                pc.skill[skill]+=1
+                sp-=2
+            elif value <=100 and sp>0:
+                pc.skill[skill]+=1
+                sp-=1
+            else:
+                sp=0
+        #leftover points?
+        pc.read_books_points[skill]=sp
+        #skill limit
+        if pc.skill[skill] > self.known_skills[skill]['limit']:
+            pc.skill[skill] = self.known_skills[skill]['limit']
+        #new minimum for reducing skills is the current value
         self.min_skill_level[skill]=pc.skill[skill]
+        #update
+        print(pc.skill[skill])
+        self.root.ids[skill].text = str(pc.skill[skill])
         self._update_perks()
 
     def add_book(self, skill, level):
