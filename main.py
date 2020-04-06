@@ -885,7 +885,7 @@ class PlanerApp(App):
         pc.read_books[skill]+=1
         pc.read_books_points[skill]+=6
         value = pc.skill[skill]
-        print(value, '>')
+        #print(value, '>')
         if self.known_skills[skill]['limit'] <= value:
             return
         #mimic books.fos
@@ -913,7 +913,7 @@ class PlanerApp(App):
         #new minimum for reducing skills is the current value
         self.min_skill_level[skill]=pc.skill[skill]
         #update
-        print(pc.skill[skill])
+        #print(pc.skill[skill])
         self.root.ids[skill].text = str(pc.skill[skill])
         self._update_perks()
 
@@ -994,10 +994,10 @@ class PlanerApp(App):
         for widget_id, widget in self.root.ids.items():
             if widget_id.startswith('cannibal_drug_'):
                 widget.disabled = 'cannibal' not in pc.traits
-                widget.state = 'normal'
+                #widget.state = 'normal'
             elif widget_id.startswith('drug_'):
                 widget.disabled = 'cannibal' in pc.traits
-                widget.state = 'normal'
+                #widget.state = 'normal'
         self.refresh_mode=False
 
     def add_special_implant(self, spec, level):
@@ -1115,19 +1115,6 @@ class PlanerApp(App):
                 else:
                     self.root.ids['perk_'+perk_id].state = 'normal'
         self._update_perks()
-        #drugs
-        #for cannibal disable normal drugs, enable cannibal drugs
-        self._toggle_cannibal_drugs()
-        for drug_id in self.known_drugs:
-            prefix='drug_'
-            num_drugs= len(pc.drugs)
-            if 'cannibal' in pc.traits:
-                prefix='cannibal_drug_'
-            if drug_id in pc.drugs:
-                self.root.ids[prefix+drug_id].state = 'down'
-            elif num_drugs >= pc.max_drugs:
-                if prefix+drug_id in self.root.ids:
-                    self.root.ids[prefix+drug_id].disabled = True
         #implants
         for widget_id, widget in self.root.ids.items():
             if widget_id.startswith('implant_'):
@@ -1142,6 +1129,19 @@ class PlanerApp(App):
                 button = self.root.ids['implant_'+implant_id+'_'+str(i)]
                 button.state = 'down'
         self.enable_implants()
+        #drugs
+        #for cannibal disable normal drugs, enable cannibal drugs
+        self._toggle_cannibal_drugs()
+        for drug_id in self.known_drugs:
+            prefix='drug_'
+            num_drugs= len(pc.drugs)
+            if 'cannibal' in pc.traits:
+                prefix='cannibal_drug_'
+            if drug_id in pc.drugs:
+                self.root.ids[prefix+drug_id].state = 'down'
+            elif num_drugs >= pc.max_drugs:
+                if prefix+drug_id in self.root.ids:
+                    self.root.ids[prefix+drug_id].disabled = True
         self.refresh_mode = False
         self.update_stats()
         if pc.level == 1:
@@ -1166,6 +1166,12 @@ class PlanerApp(App):
                         self.root.ids['trait_'+trait_id].disabled = True
             #disable drugs, books, implants tab
             self.root.ids.drugs_book_implant_tab.disabled = True
+            #reset drugs
+            self.refresh_mode = True
+            for widget_id, widget in self.root.ids.items():
+                if widget_id.startswith('cannibal_drug_') or widget_id.startswith('drug_'):
+                    widget.state = 'normal'
+            self.refresh_mode = False
             #disable skill +/-
             for widget in self.root.ids.skill_grid.children:
                 if isinstance(widget, Button):
