@@ -460,7 +460,7 @@ class PlanerApp(App):
         else:
             cw +=  (25+pc.special.S*25)/2.2
         if 'pack_rat' in pc.perks:
-            cw*=1.33
+            cw*=2.0
         if pc.class_perk == 'priest':
             cw*=0.5
         return round(cw, 2)
@@ -526,8 +526,8 @@ class PlanerApp(App):
 
 
         text+='\nCritical Chance: (ranged/melee)\n'
-        base_cc = (pc.special.L+pc.bonus.special.L)+pc.critical_chance
-        base_cc_melee = (pc.special.L+pc.bonus.special.L)+pc.hth_critical_chance
+        base_cc = max(1, pc.special.L+pc.bonus.special.L)+pc.critical_chance
+        base_cc_melee = max(1, pc.special.L+pc.bonus.special.L)+pc.hth_critical_chance
         text+=' -Unaimed:    '+str(base_cc)+'% / '+str(base_cc_melee)+'%\n'
         aim_bonus = 60 * (60 + 4 * pc.special.L) // 100
         text+=' -Eye:        '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
@@ -541,18 +541,21 @@ class PlanerApp(App):
         text+=' -Legs:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
 
         text+='\nCritical Power:\n '
-        text+=str((pc.special.L+pc.bonus.special.L)+pc.critical_power)
+        text+=str(max(1, pc.special.L+pc.bonus.special.L)+pc.critical_power)
 
-        text+=' (melee: '+str((pc.special.L+pc.bonus.special.L)+pc.hth_critical_power)+')\n'
+        text+=' (melee: '+str(max(1, pc.special.L+pc.bonus.special.L)+pc.hth_critical_power)+')\n'
         text+='\nCarry Weight:\n '+str(self.get_carry_weight())+'kg\n'
-        text+='\nSequence:\n '+str((pc.special.P+pc.bonus.special.P)*2+pc.sequence)+'\n'
+        text+='\nSequence:\n '+str(max(1, pc.special.P+pc.bonus.special.P)*2+pc.sequence)+'\n'
         melee_dmg = max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
         text+='\nMelee Damage:\n '+str(melee_dmg+pc.melee_damage)+'\n'
         text+='\nHealing Rate:\n '+str(self.get_healing_rate())+'\n'
         text+='\nArmor Class:\n  '+str((pc.special.A+pc.bonus.special.A)*3+pc.armor_class)+'\n'
         text+='\nPoison Resistance:\n '+str((pc.special.E+pc.bonus.special.E)*5+pc.poision_resist)+'\n'
         text+='\nRadiation Resistance:\n '+str((pc.special.E+pc.bonus.special.E)*2+pc.rad_resist)+'\n'
-        text+='\nRun Speed:\n '+str(pc.speed)+'%\n'
+        speed = pc.speed
+        if 'bonus_hth_attacks' in pc.perks and 'bonus_hth_damage' in pc.perks:
+            speed+=25
+        text+='\nRun Speed:\n '+str(speed)+'%\n'
         text+='\nDamage Resistance/Damage Threshold:\n'
         text+=' Normal:   '+str(min(90, pc.dr.normal))+'/'+str(pc.dt.normal)+'\n'
         text+=' Laser:    '+str(min(90, pc.dr.laser))+'/'+str(pc.dt.laser)+'\n'

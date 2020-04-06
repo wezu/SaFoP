@@ -11,7 +11,7 @@ Nuka-Cola;          pc.bonus.special.A+=1, pc.bonus.special.E-=1
 Psycho;             pc.dr.normal+=15, pc.bonus.special.S+=1, pc.bonus.special.E+=1, pc.bonus.special.P-=2
 Roentgen Rum;       pc.bonus.special.P-=2, pc.dr.fire+=5
 Rot Gut;            pc.bonus.special.P-=2, pc.bonus.dr.explode+=5
-After Burner Gum;   pc.critical_chance+=10, pc.bonus.special.L-=5
+After Burner Gum;   pc.critical_chance+=10, pc.bonus.special.L-=5, pc.hth_critical_chance+=10
 Mutie;              pc.dt.normal+=3, pc.dt.laser+=3, pc.dt.explode+=3, bonus.ap-=2
 Voodoo;             pc.bonus.special.L+=3, pc.bonus.special.E-=2, pc.bonus.special.S-=2
 Brain;              pc.bonus.special.I+=3, pc.speed+=5
