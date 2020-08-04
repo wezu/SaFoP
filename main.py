@@ -14,6 +14,11 @@ LICENSE:
 INFO:
     To run this program you will need to install Python and Kivy.
 '''
+
+import os
+os.environ["KIVY_NO_CONSOLELOG"] = "1"
+os.environ["KIVY_HOME"] = "kivy_home"
+
 from kivy.config import Config
 Config.set('graphics', 'position', 'custom')
 Config.set('graphics', 'left', 0)
@@ -217,10 +222,10 @@ def skill_cost(value):
     else:
         return 6
 
-class PlanerApp(App):
+class PlannerApp(App):
     def __init__(self, *kwargs):
         super().__init__(*kwargs)
-        self.title = 'SaFoP by wezu'
+        self.title = 'SaFoP (1.0p) by wezu'
         self._skill_interval = None
         self._last_skill = None
         self._last_amount = 0
@@ -1306,6 +1311,6 @@ class PlanerApp(App):
         #update labels
         self._update_special()
 
-if __name__ == '__main__':
-    PlanerApp().run()
-
+#if __name__ == '__main__':
+#    PlanerApp().run()
+PlannerApp().run()

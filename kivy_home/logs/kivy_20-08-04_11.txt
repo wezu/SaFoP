@@ -1,0 +1,27 @@
+[INFO   ] Logger: Record log in kivy_home\logs\kivy_20-08-04_11.txt
+[INFO   ] deps: Successfully imported "kivy_deps.gstreamer" 0.1.18
+[INFO   ] deps: Successfully imported "kivy_deps.glew" 0.1.12
+[INFO   ] deps: Successfully imported "kivy_deps.sdl2" 0.1.23
+[INFO   ] Kivy: v2.0.0rc1, git-9398c8d, 20200305
+[INFO   ] Kivy: Installed at "C:\Python38-32\lib\site-packages\kivy\__init__.py"
+[INFO   ] Python: v3.8.1 (tags/v3.8.1:1b293b6, Dec 18 2019, 22:39:24) [MSC v.1916 32 bit (Intel)]
+[INFO   ] Python: Interpreter at "C:\Python38-32\python.exe"
+[INFO   ] Factory: 184 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2 (img_pil, img_ffpyplayer, img_gif ignored)
+[INFO   ] Text: Provider: sdl2
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the "OpenGL" graphics system
+[INFO   ] GL: GLEW initialization succeeded
+[INFO   ] GL: Backend used <glew>
+[INFO   ] GL: OpenGL version <b'4.6.13547 Compatibility Profile Context 25.20.15027.9004'>
+[INFO   ] GL: OpenGL vendor <b'ATI Technologies Inc.'>
+[INFO   ] GL: OpenGL renderer <b'AMD Radeon R7 200 Series'>
+[INFO   ] GL: OpenGL parsed version: 4, 6
+[INFO   ] GL: Shading version <b'4.60'>
+[INFO   ] GL: Texture max size <16384>
+[INFO   ] GL: Texture max units <32>
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] Base: Start application main loop
+[INFO   ] GL: NPOT texture support is available
+[INFO   ] Base: Leaving application in progress...
