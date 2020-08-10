@@ -93,8 +93,8 @@ Soldier;                self.perk_effect('soldier');                            
 Super Mutant;           pc.special.E+=3;                                                            50;       3;       pc.class_perk is None;                                                                  Double your Hit Points. You can't wear small guns or robes/combat armors.You also cannot run. +3 EN
 Killer;                 pc.special.A+=3;                                                            60;       3;       pc.class_perk is None;                                                                  Regen full AP when kill a player(5 AP if you kill NCP).Respawn time is 500 longer.+3 AG
 Assassin;               pc.special.P+=3;                                                            90;       3;       pc.class_perk is None;                                                                  90% to not desneak while attacking. You deal 75% less damage when you unsneak. +3 PE
-Paramedic;              pc.skill.first_aid+=50,pc.skill.doctor+=50, pc.bonus_damage-=50;            50;       3;       pc.class_perk is None;
-Leader;                 None;                                                                       75;       3;       pc.class_perk is None;
+Paramedic;              pc.skill.first_aid+=50,pc.skill.doctor+=50, pc.bonus_damage-=50;            65;       3;       pc.class_perk is None;
+Leader;                 None;                                                                       65;       3;       pc.class_perk is None;
 Small Ranged Damage 1;  None;                                                                       55;       4;       True;
 Small Ranged Damage 2;  None;                                                                       55;       4;       'small_ranged_damage_1' in pc.perks;
 Small Ranged Damage 3;  None;                                                                       55;       4;       'small_ranged_damage_2' in pc.perks;
