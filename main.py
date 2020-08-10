@@ -37,7 +37,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
-
+from kivy.core.clipboard import Clipboard
 from kivy.lang import Builder
 
 from copy import deepcopy
@@ -106,6 +106,7 @@ class dotdict(defaultdict):
 PERK_TYPE_SUPPORT = 1
 PERK_TYPE_NORMAL = 2
 PERK_TYPE_CLASS = 3
+PERK_TYPE_PVE = 4
 
 #setup containers for the stats
 #most don't need to be set, but they are here for reference
@@ -126,10 +127,12 @@ pc.special_points = 5
 #perks
 pc.perk_every_levels = 3
 pc.perk_points = 0
+pc.pve_perk_points = 0
 pc.perks = dotdict()
 pc.class_perk = None
 #trait
 pc.traits = []
+pc.max_traits = 2
 #criticals
 pc.head_critical_resist_tier = 0
 pc.critical_resist_tier = 0
@@ -225,7 +228,7 @@ def skill_cost(value):
 class PlannerApp(App):
     def __init__(self, *kwargs):
         super().__init__(*kwargs)
-        self.title = 'SaFoP (1.0p) by wezu'
+        self.title = 'SaFoP (s3.1) by wezu'
         self._skill_interval = None
         self._last_skill = None
         self._last_amount = 0
@@ -260,6 +263,7 @@ class PlannerApp(App):
         self.known_perks={}
         self.known_perks_support ={}
         self.known_perks_class ={}
+        self.known_pve_perks = {}
         with open('data/perks.txt') as infile:
             for line in infile.readlines():
                 if not line.startswith('#'):
@@ -279,6 +283,9 @@ class PlannerApp(App):
                                                 'desc':desc, 'effect':effect}
                     elif type == PERK_TYPE_CLASS:
                         self.known_perks_class[id]={'name':name, 'level':level, 'req':req,
+                                                      'desc':desc, 'effect':effect}
+                    elif type == PERK_TYPE_PVE:
+                        self.known_pve_perks[id]={'name':name, 'level':level, 'req':req,
                                                       'desc':desc, 'effect':effect}
         #load drugs data
         self.known_drugs={}
@@ -360,7 +367,15 @@ class PlannerApp(App):
             self.popup.add_widget(label)
             self.popup.open()
         else:
-            self.level_restore()
+            #self.level_restore()
+            global pc #evil global, such unpythonic, much panic, wow!
+            pc = self.level_history.pop()
+            #disable drugs else things get messed up
+            for drug_id in pc.drugs:
+                for cmd in self.known_drugs[drug_id]['effect']:
+                    exec(anti_cmd(cmd))
+            pc.drugs=[]
+            self.refresh_all()
 
     def write_save(self, button=None):
         '''Write a save file '''
@@ -450,6 +465,12 @@ class PlannerApp(App):
             for perk_id, perk in self.known_perks_class.items():
                 if perk['level']<=pc.level and self.root.ids['perk_'+perk_id].state=='normal':
                     self.root.ids['perk_'+perk_id].disabled = False
+        #check for pve perks
+        if pc.pve_perk_points > 0:
+            for perk_id, perk in self.known_pve_perks.items():
+                if perk['level']<=pc.level and self.root.ids['perk_'+perk_id].state=='normal':
+                    if eval(perk['req']):
+                        self.root.ids['perk_'+perk_id].disabled = False
 
     def get_carry_weight(self):
         '''Returns the max carry weight '''
@@ -471,12 +492,55 @@ class PlannerApp(App):
         return round(cw, 2)
 
     def get_healing_rate(self):
-        hr=max(3, (pc.special.E+pc.bonus.special.E)//2)+pc.healing_rate
+        hr = max(3, (pc.special.E+pc.bonus.special.E)//2)+pc.healing_rate
+        hr += (pc.hit_points+pc.bonus_hit_points)//2
         if pc.class_perk == 'priest':
             hr*=2
         if pc.class_perk == 'chosen_one':
             hr = hr//2
         return hr
+
+    def _get_dr(self, dmg_type):
+        ''' Returns damage resistance with DC bonus
+        '''
+        dr = pc.dr[dmg_type]
+        if 'deathclaw_perk' in pc.perks:
+            dc_bonus = {'normal':   40+pc.special.L+pc.bonus.special.L+pc.critical_chance,
+                        'laser':    40+(pc.special.P+pc.bonus.special.P)*2,
+                        'fire':     40+ max(3, (pc.special.E+pc.bonus.special.E)//2)+pc.healing_rate, #self.get_healing_rate();
+                        'plasma':   40+pc.special.S+pc.bonus.special.S,
+                        'explode':  40+pc.special.E+pc.bonus.special.E,
+                        'electric': 40+5+(pc.special.A+pc.bonus.special.A)+pc.action_points,
+                        }
+            dr+= dc_bonus[dmg_type]
+        return dr
+
+    def _get_dt(self, dmg_type):
+        ''' Returns damage threshold with DC bonus
+        '''
+        dt = pc.dt[dmg_type]
+        if 'deathclaw_perk' in pc.perks:
+            dc_bonus = {'normal':   6+pc.special.I+pc.bonus.special.I,
+                        'laser':    7+(pc.special.C+pc.bonus.special.C)*2,
+                        'fire':     4+(pc.special.P+pc.bonus.special.P)*2+pc.sequence,
+                        'plasma':   5+pc.special.L+pc.bonus.special.L,
+                        'explode':  6+pc.special.A+pc.bonus.special.A,
+                        'electric': 3+pc.special.P+pc.bonus.special.P,
+                        }
+            dt+= dc_bonus[dmg_type]
+        return dt
+
+    def copy_to_clip(self):
+        ''' Copy stats to clipboard
+        '''
+        text = self.root.ids.stats_txt.text
+        if text.startswith('Copied'):
+            text = text[21:]
+        try:
+            Clipboard.copy('```'+text+'```')
+            self.root.ids.stats_txt.text = 'Copied to clipboard!\n'+text
+        except:
+            self.root.ids.stats_txt.text = 'Error!\n Clipboard not available!\n\n'+text
 
     def update_stats(self, widget=None):
         '''Update the stats summary,
@@ -508,7 +572,11 @@ class PlannerApp(App):
             text+=' None\n'
         else:
             text+=' '+self.known_perks_class[pc.class_perk]['name']+'\n'
-        text+='\nHit Points:\n '+str(pc.hit_points+pc.bonus_hit_points)+'\n'
+
+        hp = pc.hit_points+pc.bonus_hit_points
+        if 'super_mutant' in pc.perks:
+            hp += hp
+        text+='\nHit Points:\n '+str(hp)+'\n'
         text+='\nAction Points:\n '+str(5+(pc.special.A+pc.bonus.special.A)//2+pc.action_points)+'\n'
         sight_range = 20+(pc.special.P+pc.bonus.special.P)*3 + pc.view_range
         text+='\nView Range:\n'
@@ -534,15 +602,15 @@ class PlannerApp(App):
         base_cc = max(1, pc.special.L+pc.bonus.special.L)+pc.critical_chance
         base_cc_melee = max(1, pc.special.L+pc.bonus.special.L)+pc.hth_critical_chance
         text+=' -Unaimed:    '+str(base_cc)+'% / '+str(base_cc_melee)+'%\n'
-        aim_bonus = 60 * (60 + 4 * pc.special.L) // 100
+        aim_bonus = 60 * (20 + 4 * pc.special.L) // 100
         text+=' -Eye:        '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
-        aim_bonus = 40 * (60 + 4 * pc.special.L) // 100
+        aim_bonus = 40 * (20 + 4 * pc.special.L) // 100
         text+=' -Head:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
-        aim_bonus = 30 * (60 + 4 * pc.special.L) // 100
+        aim_bonus = 30 * (20 + 4 * pc.special.L) // 100
         text+=' -Groin:      '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
-        aim_bonus = 30 * (60 + 4 * pc.special.L) // 100
+        aim_bonus = 30 * (20 + 4 * pc.special.L) // 100
         text+=' -Arms:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
-        aim_bonus = 20 * (60 + 4 * pc.special.L) // 100
+        aim_bonus = 20 * (20 + 4 * pc.special.L) // 100
         text+=' -Legs:       '+str(base_cc+aim_bonus)+'% / '+str(base_cc_melee+aim_bonus)+'%\n'
 
         text+='\nCritical Power:\n '
@@ -551,8 +619,10 @@ class PlannerApp(App):
         text+=' (melee: '+str(max(1, pc.special.L+pc.bonus.special.L)+pc.hth_critical_power)+')\n'
         text+='\nCarry Weight:\n '+str(self.get_carry_weight())+'kg\n'
         text+='\nSequence:\n '+str(max(1, pc.special.P+pc.bonus.special.P)*2+pc.sequence)+'\n'
-        melee_dmg = max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
-        text+='\nMelee Damage:\n '+str(melee_dmg+pc.melee_damage)+'\n'
+        melee_dmg = pc.melee_damage + max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
+        if 'deathclaw_perk' in pc.perks:
+            melee_dmg += melee_dmg;
+        text+='\nMelee Damage:\n '+str(melee_dmg)+'\n'
         text+='\nHealing Rate:\n '+str(self.get_healing_rate())+'\n'
         text+='\nArmor Class:\n  '+str((pc.special.A+pc.bonus.special.A)*3+pc.armor_class)+'\n'
         text+='\nPoison Resistance:\n '+str((pc.special.E+pc.bonus.special.E)*5+pc.poision_resist)+'\n'
@@ -561,13 +631,13 @@ class PlannerApp(App):
         if 'bonus_hth_attacks' in pc.perks and 'bonus_hth_damage' in pc.perks:
             speed+=25
         text+='\nRun Speed:\n '+str(speed)+'%\n'
-        text+='\nDamage Resistance/Damage Threshold:\n'
-        text+=' Normal:   '+str(min(90, pc.dr.normal))+'/'+str(pc.dt.normal)+'\n'
-        text+=' Laser:    '+str(min(90, pc.dr.laser))+'/'+str(pc.dt.laser)+'\n'
-        text+=' Fire:     '+str(min(90, pc.dr.fire))+'/'+str(pc.dt.fire)+'\n'
-        text+=' Plasma:   '+str(min(90, pc.dr.plasma))+'/'+str(pc.dt.plasma)+'\n'
-        text+=' Explode:  '+str(min(90, pc.dr.explode))+'/'+str(pc.dt.explode)+'\n'
-        text+=' Electric: '+str(min(90, pc.dr.electric))+'/'+str(pc.dt.electric)+'\n'
+        text+='\nDamage Threshold/Damage Resistance:\n'
+        text+=' Normal:   '+str(min(90, self._get_dt('normal')))+'/'+str(self._get_dr('normal'))+'\n'
+        text+=' Laser:    '+str(min(90, self._get_dt('laser')))+'/'+str(self._get_dr('laser'))+'\n'
+        text+=' Fire:     '+str(min(90, self._get_dt('fire')))+'/'+str(self._get_dr('fire'))+'\n'
+        text+=' Plasma:   '+str(min(90, self._get_dt('plasma')))+'/'+str(self._get_dr('plasma'))+'\n'
+        text+=' Explode:  '+str(min(90, self._get_dt('explode')))+'/'+str(self._get_dr('explode'))+'\n'
+        text+=' Electric: '+str(min(90, self._get_dt('electric')))+'/'+str(self._get_dr('electric'))+'\n'
 
         text+='\nSkill Points per Level:\n '
         skill_points = pc.bonus_skill_points
@@ -707,29 +777,15 @@ class PlannerApp(App):
 
     def perk_effect(self, perk):
         '''Hardcoded effects of perks that are too complex'''
-        if perk == 'deathclaw':
-            pc.special.S+=3
-            pc.dr.normal+=40+pc.special.L+pc.bonus.special.L+pc.critical_chance
-            pc.dr.laser+=40+pc.special.P+pc.bonus.special.P
-            pc.dr.fire+=40+self.get_healing_rate()
-            pc.dr.plasma+=40+pc.special.I+pc.bonus.special.I
-            pc.dr.explode+=40+pc.special.E+pc.bonus.special.E
-            pc.dr.electric+=40+(5+(pc.special.A+pc.bonus.special.A)//2+pc.action_points)
-
-            pc.dt.normal+=6+pc.special.I+pc.bonus.special.I
-            pc.dt.laser+=7+pc.special.C+pc.bonus.special.C
-            pc.dt.fire+=4+(pc.special.P+pc.bonus.special.P)*2+pc.sequence
-            pc.dt.plasma+=5+pc.special.L+pc.bonus.special.L
-            pc.dt.explode+=6+pc.special.A+pc.bonus.special.A
-            pc.dt.electric+=3+pc.special.P+pc.bonus.special.P
-
-            #2x melee dmg - but calculated with current stats
-            #we just calc melee damage and add it as melee damage
-            base_melee_dmg= max(1, (pc.special.S+pc.bonus.special.S-5) * (1 if 'bruiser' in pc.traits else 2))
-            pc.melee_damage+=pc.melee_damage+base_melee_dmg
-            #speed bonus
-            pc.speed+=10
-        elif perk == 'soldier':
+        if perk == 'chosen_one':
+            pc.special.C += 3
+            pc.perk_points += 2
+            pc.max_traits += 1
+            for trait_id in self.known_traits:
+                if trait_id not in ['gifted', 'bonehead']:
+                    if not trait_id in pc.traits:
+                        self.root.ids['trait_'+trait_id].disabled = False
+        if perk == 'soldier':
             pc.special.S+=1
             pc.special.P+=1
             pc.special.E+=1
@@ -750,8 +806,6 @@ class PlannerApp(App):
             for skill_id, skill in self.known_skills.items():
                 pc.skill[skill_id]+=1
             pc.per_bullet_dmg+=1
-            pc.max_implants +=1
-            pc.max_implants_special += 1
             pc.flat_damage+=1
             pc.critical_power_tier += 1
             pc.critical_power+=1
@@ -782,11 +836,9 @@ class PlannerApp(App):
             scroll.add_widget(grid)
             self.popup.add_widget(scroll)
             self.popup.open()
-        elif perk == 'mutant':
-            pc.special.E+=3
-            pc.hit_points+=pc.hit_points+pc.bonus_hit_points+100
 
-    def add_perk(self, button):
+
+    def add_perk(self, button, pve_perk_id=None):
         '''Adds or removes a perk.
         The perk and state are taken from the button attributes.
         Called when clicked on a perk button
@@ -795,6 +847,8 @@ class PlannerApp(App):
             return
         name = button.text
         id = idf(name)
+        if pve_perk_id:
+            id = pve_perk_id
         if button.state == 'down':# add perk
             pc.perks[id] = int(pc.level)
             #check if it's support perk, normal perk or class perk
@@ -811,6 +865,12 @@ class PlannerApp(App):
                     self.root.ids['perk_'+perk_id].disabled = True
             elif id in self.known_perks_support:
                 perk_dict = self.known_perks_support
+            elif id in self.known_pve_perks:
+                perk_dict = self.known_pve_perks
+                pc.pve_perk_points -= 1
+                for perk_id in self.known_pve_perks:
+                    if perk_id != id and self.root.ids['perk_'+perk_id].state == 'normal':
+                        self.root.ids['perk_'+perk_id].disabled = True
             #apply effect
             for cmd in perk_dict[id]['effect']:
                 exec(cmd)
@@ -821,6 +881,9 @@ class PlannerApp(App):
                 pc.perk_points += 1
             elif id in self.known_perks_support:
                 perk_dict = self.known_perks_support
+            elif id in self.known_pve_perks:
+                perk_dict = self.known_pve_perks
+                pc.pve_perk_points += 1
             #class perks are complex, don't remove
             #elif id in self.known_perks_class:
             #    perk_dict = self.known_perks_class
@@ -847,7 +910,7 @@ class PlannerApp(App):
             pc.traits.append(id)
             for cmd in self.known_traits[id]['effect']:
                 exec(cmd)
-            if len(pc.traits) == 2:
+            if len(pc.traits) == pc.max_traits:
                 for trait_id in self.known_traits:
                     if self.root.ids['trait_'+trait_id].state == 'normal':
                         self.root.ids['trait_'+trait_id].disabled = True
@@ -1093,7 +1156,7 @@ class PlannerApp(App):
         for name, value in pc.skill.items():
             self.root.ids[name].text = str(value)
             #books
-            if name not in ('speech', 'gambling'):
+            if name not in ('speech', 'gambling', 'engineering'):
                 for i in range(1, 11):
                     number_read = 0
                     if name in pc.read_books:
@@ -1228,6 +1291,8 @@ class PlannerApp(App):
                 return
         if pc.level == 30 and pc.perk_points > 0:
             return
+        if pc.pve_perk_points == 1:
+            return
         #save a copy of the stats
         self.level_history.append(deepcopy(pc))
         # first level up
@@ -1275,6 +1340,10 @@ class PlannerApp(App):
         if pc.level<=24:
             if pc.level%pc.perk_every_levels == 0:
                 pc.perk_points = 1
+        #give pve perk points
+        if pc.level>=55:
+            if pc.level%5 == 0:
+                pc.pve_perk_points=1
         self._update_perks()
         #disable un-taking perks from the last level
         for perk_id in pc.perks:
@@ -1283,10 +1352,16 @@ class PlannerApp(App):
         self.root.ids.level_label.text = 'Level: '+str(pc.level)
         #update stats
         self.update_stats()
+
+        #disable traits
+        if len(pc.traits) == pc.max_traits:
+            for trait_id in self.known_traits:
+                self.root.ids['trait_'+trait_id].disabled = True
+
         #level up to next perk or class perk level
         if to_perk:
-            if pc.level>120:
-                return
+            #if pc.level>120:
+            #    return
             if pc.level not in (30, 40, 50, 60, 80, 100, 110, 120):
                 #print('multi level up', pc.level)
                 self.level_up(to_perk)

@@ -100,14 +100,24 @@ BoxLayout:
         AccordionItem:
             title: 'Stats'
             on_collapse: app.update_stats(self)
-            ScrollView:
-                Label:
-                    padding: 10, 10
-                    id: stats_txt
-                    text: "If You see this message, something went wrong."
-                    size_hint_y: None
-                    text_size: self.width, None
-                    height: self.texture_size[1]
+            BoxLayout:
+                orientation: 'vertical'
+                Button:
+                    id: clipboard
+                    on_release: app.copy_to_clip()
+                    text: 'Copy to clipboard'
+                    disabled: False
+                    height: '32dp'
+                    width: '200dp'
+                    size_hint: None, None
+                ScrollView:
+                    Label:
+                        padding: 10, 10
+                        id: stats_txt
+                        text: "If You see this message, something went wrong."
+                        size_hint_y: None
+                        text_size: self.width, None
+                        height: self.texture_size[1]
 
         AccordionItem:
             title: 'Drugs, Books and Implants'
@@ -1914,11 +1924,6 @@ BoxLayout:
                                         on_state: app.add_perk(self)
                                         disabled: True
                                     ToggleButton:
-                                        id: perk_heave_ho!!
-                                        text: 'Heave Ho!!'
-                                        on_state: app.add_perk(self)
-                                        disabled: True
-                                    ToggleButton:
                                         id: perk_hth_evade+
                                         text: 'HtH Evade+'
                                         on_state: app.add_perk(self)
@@ -1989,6 +1994,11 @@ BoxLayout:
                                         text: 'Living Anatomy'
                                         on_state: app.add_perk(self)
                                         disabled: True
+                                    ToggleButton:
+                                        id: perk_silent_running
+                                        text: 'Silent Running'
+                                        on_state: app.add_perk(self)
+                                        disabled: True
                         TabbedPanelItem:
                             text: 'Lvl 15'
                             ScrollView:
@@ -2038,11 +2048,6 @@ BoxLayout:
                                     ToggleButton:
                                         id: perk_silent_death
                                         text: 'Silent Death'
-                                        on_state: app.add_perk(self)
-                                        disabled: True
-                                    ToggleButton:
-                                        id: perk_silent_running
-                                        text: 'Silent Running'
                                         on_state: app.add_perk(self)
                                         disabled: True
                         TabbedPanelItem:
@@ -2281,12 +2286,12 @@ BoxLayout:
                                 on_state: app.add_perk(self)
                                 disabled: True
                             ToggleButton:
-                                id: perk_assassin
+                                id: perk_paramedic
                                 text: 'Paramedic'
                                 on_state: app.add_perk(self)
                                 disabled: True
                             ToggleButton:
-                                id: perk_assassin
+                                id: perk_leader
                                 text: 'Leader'
                                 on_state: app.add_perk(self)
                                 disabled: True
@@ -2305,158 +2310,1612 @@ BoxLayout:
                                 text: 'Small Ranged Damage'
                             BoxLayout:
                                 ToggleButton:
-                                    id: small_ranged_damage_1
+                                    id: perk_small_ranged_damage_1
                                     text:"1"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_1')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_2
+                                    id: perk_small_ranged_damage_2
                                     text:"2"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_2')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_3
+                                    id: perk_small_ranged_damage_3
                                     text:"3"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_3')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_4
+                                    id: perk_small_ranged_damage_4
                                     text:"4"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_4')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_5
+                                    id: perk_small_ranged_damage_5
                                     text:"5"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_5')
                                     disabled: True
                             BoxLayout:
                                 ToggleButton:
-                                    id: small_ranged_damage_6
+                                    id: perk_small_ranged_damage_6
                                     text:"6"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_6')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_7
+                                    id: perk_small_ranged_damage_7
                                     text:"7"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_7')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_8
+                                    id: perk_small_ranged_damage_8
                                     text:"8"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_8')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_9
+                                    id: perk_small_ranged_damage_9
                                     text:"9"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_9')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_10
+                                    id: perk_small_ranged_damage_10
                                     text:"10"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_10')
                                     disabled: True
                             BoxLayout:
                                 ToggleButton:
-                                    id: small_ranged_damage_11
+                                    id: perk_small_ranged_damage_11
                                     text:"11"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_11')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_12
+                                    id: perk_small_ranged_damage_12
                                     text:"12"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_12')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_13
+                                    id: perk_small_ranged_damage_13
                                     text:"13"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_13')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_14
+                                    id: perk_small_ranged_damage_14
                                     text:"14"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_14')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_15
+                                    id: perk_small_ranged_damage_15
                                     text:"15"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_15')
                                     disabled: True
                             BoxLayout:
                                 ToggleButton:
-                                    id: small_ranged_damage_16
+                                    id: perk_small_ranged_damage_16
                                     text:"16"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_16')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_17
+                                    id: perk_small_ranged_damage_17
                                     text:"17"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_17')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_18
+                                    id: perk_small_ranged_damage_18
                                     text:"18"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_18')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_19
+                                    id: perk_small_ranged_damage_19
                                     text:"19"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_19')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_20
+                                    id: perk_small_ranged_damage_20
                                     text:"20"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_20')
                                     disabled: True
                             BoxLayout:
                                 ToggleButton:
-                                    id: small_ranged_damage_21
+                                    id: perk_small_ranged_damage_21
                                     text:"21"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_21')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_22
+                                    id: perk_small_ranged_damage_22
                                     text:"22"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_22')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_23
+                                    id: perk_small_ranged_damage_23
                                     text:"23"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_23')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_24
+                                    id: perk_small_ranged_damage_24
                                     text:"24"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_24')
                                     disabled: True
                                 ToggleButton:
-                                    id: small_ranged_damage_25
+                                    id: perk_small_ranged_damage_25
                                     text:"25"
-                                    on_state: app.add_perk(self)
+                                    on_state: app.add_perk(self, 'small_ranged_damage_25')
                                     disabled: True
                             Label:
                                 text: 'Strong Back Lite'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, 'strong_back_lite_1')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, 'strong_back_lite_2')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, 'strong_back_lite_3')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, 'strong_back_lite_4')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, 'strong_back_lite_5')
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, 'strong_back_lite_6')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, 'strong_back_lite_7')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, 'strong_back_lite_8')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, 'strong_back_lite_9')
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "strong_back_lite_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "strong_back_lite_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "strong_back_lite_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "strong_back_lite_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "strong_back_lite_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "strong_back_lite_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "strong_back_lite_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "strong_back_lite_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "strong_back_lite_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "strong_back_lite_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "strong_back_lite_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "strong_back_lite_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "strong_back_lite_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "strong_back_lite_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "strong_back_lite_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "strong_back_lite_25")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_26
+                                    text:"26"
+                                    on_state: app.add_perk(self, "strong_back_lite_26")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_27
+                                    text:"27"
+                                    on_state: app.add_perk(self, "strong_back_lite_27")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_28
+                                    text:"28"
+                                    on_state: app.add_perk(self, "strong_back_lite_28")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_29
+                                    text:"29"
+                                    on_state: app.add_perk(self, "strong_back_lite_29")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_30
+                                    text:"30"
+                                    on_state: app.add_perk(self, "strong_back_lite_30")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_31
+                                    text:"31"
+                                    on_state: app.add_perk(self, "strong_back_lite_31")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_32
+                                    text:"32"
+                                    on_state: app.add_perk(self, "strong_back_lite_32")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_33
+                                    text:"33"
+                                    on_state: app.add_perk(self, "strong_back_lite_33")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_34
+                                    text:"34"
+                                    on_state: app.add_perk(self, "strong_back_lite_34")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_35
+                                    text:"35"
+                                    on_state: app.add_perk(self, "strong_back_lite_35")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_36
+                                    text:"36"
+                                    on_state: app.add_perk(self, "strong_back_lite_36")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_37
+                                    text:"37"
+                                    on_state: app.add_perk(self, "strong_back_lite_37")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_38
+                                    text:"38"
+                                    on_state: app.add_perk(self, "strong_back_lite_38")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_39
+                                    text:"39"
+                                    on_state: app.add_perk(self, "strong_back_lite_39")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_40
+                                    text:"40"
+                                    on_state: app.add_perk(self, "strong_back_lite_40")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_41
+                                    text:"41"
+                                    on_state: app.add_perk(self, "strong_back_lite_41")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_42
+                                    text:"42"
+                                    on_state: app.add_perk(self, "strong_back_lite_42")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_43
+                                    text:"43"
+                                    on_state: app.add_perk(self, "strong_back_lite_43")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_44
+                                    text:"44"
+                                    on_state: app.add_perk(self, "strong_back_lite_44")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_45
+                                    text:"45"
+                                    on_state: app.add_perk(self, "strong_back_lite_45")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_strong_back_lite_46
+                                    text:"46"
+                                    on_state: app.add_perk(self, "strong_back_lite_46")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_47
+                                    text:"47"
+                                    on_state: app.add_perk(self, "strong_back_lite_47")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_48
+                                    text:"48"
+                                    on_state: app.add_perk(self, "strong_back_lite_48")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_49
+                                    text:"49"
+                                    on_state: app.add_perk(self, "strong_back_lite_49")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_strong_back_lite_50
+                                    text:"50"
+                                    on_state: app.add_perk(self, "strong_back_lite_50")
+                                    disabled: True
                             Label:
                                 text: 'Semi Pathfinder'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_semi_pathfinder_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "semi_pathfinder_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_semi_pathfinder_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "semi_pathfinder_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_semi_pathfinder_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "semi_pathfinder_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_semi_pathfinder_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "semi_pathfinder_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_semi_pathfinder_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "semi_pathfinder_5")
+                                    disabled: True
                             Label:
                                 text: 'Mini Toughness'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mini_toughness_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "mini_toughness_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "mini_toughness_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "mini_toughness_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "mini_toughness_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "mini_toughness_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mini_toughness_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "mini_toughness_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "mini_toughness_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "mini_toughness_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "mini_toughness_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "mini_toughness_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mini_toughness_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "mini_toughness_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "mini_toughness_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "mini_toughness_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "mini_toughness_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "mini_toughness_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mini_toughness_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "mini_toughness_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "mini_toughness_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "mini_toughness_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "mini_toughness_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "mini_toughness_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mini_toughness_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "mini_toughness_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "mini_toughness_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "mini_toughness_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "mini_toughness_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mini_toughness_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "mini_toughness_25")
+                                    disabled: True
                             Label:
                                 text: 'Firegecko Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "firegecko_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "firegecko_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "firegecko_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "firegecko_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "firegecko_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "firegecko_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "firegecko_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "firegecko_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "firegecko_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "firegecko_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "firegecko_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "firegecko_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "firegecko_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "firegecko_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "firegecko_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "firegecko_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "firegecko_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "firegecko_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "firegecko_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "firegecko_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "firegecko_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "firegecko_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "firegecko_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "firegecko_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_firegecko_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "firegecko_slayer_25")
+                                    disabled: True
                             Label:
                                 text: 'Floater Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_floater_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "floater_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "floater_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "floater_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "floater_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "floater_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_floater_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "floater_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "floater_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "floater_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "floater_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "floater_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_floater_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "floater_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "floater_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "floater_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "floater_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "floater_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_floater_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "floater_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "floater_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "floater_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "floater_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "floater_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_floater_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "floater_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "floater_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "floater_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "floater_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_floater_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "floater_slayer_25")
+                                    disabled: True
                             Label:
                                 text: 'Centaur Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_centaur_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "centaur_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "centaur_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "centaur_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "centaur_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "centaur_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_centaur_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "centaur_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "centaur_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "centaur_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "centaur_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "centaur_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_centaur_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "centaur_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "centaur_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "centaur_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "centaur_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "centaur_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_centaur_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "centaur_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "centaur_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "centaur_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "centaur_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "centaur_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_centaur_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "centaur_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "centaur_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "centaur_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "centaur_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_centaur_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "centaur_slayer_25")
+                                    disabled: True
                             Label:
                                 text: 'Robots Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_robots_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "robots_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "robots_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "robots_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "robots_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "robots_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_robots_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "robots_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "robots_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "robots_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "robots_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "robots_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_robots_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "robots_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "robots_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "robots_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "robots_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "robots_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_robots_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "robots_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "robots_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "robots_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "robots_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "robots_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_robots_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "robots_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "robots_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "robots_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "robots_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_robots_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "robots_slayer_25")
+                                    disabled: True
                             Label:
                                 text: 'Deathclaw Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_deathclaw_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "deathclaw_slayer_25")
+                                    disabled: True
                             Label:
                                 text: 'Mutant Slayer'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mutant_slayer_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "mutant_slayer_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "mutant_slayer_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "mutant_slayer_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "mutant_slayer_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "mutant_slayer_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mutant_slayer_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "mutant_slayer_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "mutant_slayer_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "mutant_slayer_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "mutant_slayer_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "mutant_slayer_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mutant_slayer_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "mutant_slayer_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "mutant_slayer_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "mutant_slayer_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "mutant_slayer_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "mutant_slayer_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mutant_slayer_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "mutant_slayer_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "mutant_slayer_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "mutant_slayer_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "mutant_slayer_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "mutant_slayer_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_mutant_slayer_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "mutant_slayer_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "mutant_slayer_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "mutant_slayer_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "mutant_slayer_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_mutant_slayer_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "mutant_slayer_25")
+                                    disabled: True
                             Label:
-                                text: 'Earth Defender;'
+                                text: 'Earth Defender'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_earth_defender_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "earth_defender_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "earth_defender_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "earth_defender_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "earth_defender_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "earth_defender_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_earth_defender_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "earth_defender_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "earth_defender_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "earth_defender_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "earth_defender_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "earth_defender_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_earth_defender_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "earth_defender_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "earth_defender_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "earth_defender_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "earth_defender_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "earth_defender_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_earth_defender_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "earth_defender_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "earth_defender_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "earth_defender_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "earth_defender_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "earth_defender_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_earth_defender_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "earth_defender_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "earth_defender_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "earth_defender_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "earth_defender_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_earth_defender_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "earth_defender_25")
+                                    disabled: True
                             Label:
-                                text: 'Human Slayer'
-
-
+                                text: 'Murder'
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_murder_1
+                                    text:"1"
+                                    on_state: app.add_perk(self, "murder_1")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_2
+                                    text:"2"
+                                    on_state: app.add_perk(self, "murder_2")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_3
+                                    text:"3"
+                                    on_state: app.add_perk(self, "murder_3")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_4
+                                    text:"4"
+                                    on_state: app.add_perk(self, "murder_4")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_5
+                                    text:"5"
+                                    on_state: app.add_perk(self, "murder_5")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_murder_6
+                                    text:"6"
+                                    on_state: app.add_perk(self, "murder_6")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_7
+                                    text:"7"
+                                    on_state: app.add_perk(self, "murder_7")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_8
+                                    text:"8"
+                                    on_state: app.add_perk(self, "murder_8")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_9
+                                    text:"9"
+                                    on_state: app.add_perk(self, "murder_9")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_10
+                                    text:"10"
+                                    on_state: app.add_perk(self, "murder_10")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_murder_11
+                                    text:"11"
+                                    on_state: app.add_perk(self, "murder_11")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_12
+                                    text:"12"
+                                    on_state: app.add_perk(self, "murder_12")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_13
+                                    text:"13"
+                                    on_state: app.add_perk(self, "murder_13")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_14
+                                    text:"14"
+                                    on_state: app.add_perk(self, "murder_14")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_15
+                                    text:"15"
+                                    on_state: app.add_perk(self, "murder_15")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_murder_16
+                                    text:"16"
+                                    on_state: app.add_perk(self, "murder_16")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_17
+                                    text:"17"
+                                    on_state: app.add_perk(self, "murder_17")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_18
+                                    text:"18"
+                                    on_state: app.add_perk(self, "murder_18")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_19
+                                    text:"19"
+                                    on_state: app.add_perk(self, "murder_19")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_20
+                                    text:"20"
+                                    on_state: app.add_perk(self, "murder_20")
+                                    disabled: True
+                            BoxLayout:
+                                ToggleButton:
+                                    id: perk_murder_21
+                                    text:"21"
+                                    on_state: app.add_perk(self, "murder_21")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_22
+                                    text:"22"
+                                    on_state: app.add_perk(self, "murder_22")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_23
+                                    text:"23"
+                                    on_state: app.add_perk(self, "murder_23")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_24
+                                    text:"24"
+                                    on_state: app.add_perk(self, "murder_24")
+                                    disabled: True
+                                ToggleButton:
+                                    id: perk_murder_25
+                                    text:"25"
+                                    on_state: app.add_perk(self, "murder_25")
+                                    disabled: True
         AccordionItem:
             title: 'Traits and Special'
             BoxLayout:

@@ -9,7 +9,7 @@ Educated;               pc.bonus_skill_points+=2;                           1;  
 Harmless;               None;                                               1;       1;       pc.special.C >= 6 and pc.skill.steal >= 125;            Halved reputation loss when stealing
 Gecko Skinning;         None;                                               1;       1;       pc.skill.outdoorsman >= 100;                               Ability to skin geckos
 Stealth Girl;           None;                                               1;       1;       pc.skill.sneak >= 100 and pc.skill.repair >= 100;           Doubled stealth boy's battery life
-Rad Resistance;         pc.rad_resist+=30, pc.poision_resist+=20;           1;       1;       pc.special.I >= 4 and pc.skill.doctor >= 100;           +30 to radiation resistance, +20 to poison resistance
+Rad Resistance;         pc.rad_resist+=9;                                   1;       1;       pc.special.I >= 4 and pc.skill.doctor >= 100;           +30 to radiation resistance, +20 to poison resistance
 Ranger;                 None;                                               1;       1;       pc.skill.outdoorsman >= 100;                                Ability to craft several new items, a safe house instead of a tent
 Mr. Fixit;              None;                                               1;       1;       pc.skill.repair >= 150;                               Repairing items is easier
 Negotiator;             None;                                               1;       1;       pc.skill.barter >= 125;                              Reputation lower than neutral is upgraded to neutral when talking to NPCs
@@ -66,7 +66,7 @@ Lifegiver+;             pc.bonus_hit_points+=40;                            15; 
 Lifegiver++;            pc.bonus_hit_points+=30;                            18;       2;       pc.special.E >= 7;                                                        +30 to hit points
 Livewire;               pc.armor_class+=pc.special.A*3;                     3;        2;       pc.special.A >= 6;                                                        Doubled AC derived from Agility
 Living Anatomy;         pc.flat_damage+=5;                                  12;       2;       pc.skill.first_aid >= 100;                                                       +5 to damage when attacking living organisms, better luck when using First Aid
-Man of Steel;           pc.critical_resist_tier-=1;                              15;       2;       pc.special.E >= 8;                                                        Increased resistance to critical hits
+Man of Steel;           pc.critical_resist_tier-=1;                         15;       2;       pc.special.E >= 8;                                                        Increased resistance to critical hits
 Medic;                  None;                                               15;       2;       pc.skill.first_aid >= 150;                                                       Healing cooldowns reduced by 50
 More Critical;          pc.critical_chance+=6;                              3;        2;       pc.skill.small_guns >= 100 or pc.skill.big_guns >= 100 or pc.skill.energy_weapons >= 100 or pc.skill.throwing >= 100;  +6 to critical hit chance
 More Ranged Damage;     pc.per_bullet_dmg+=3;                               15;       2;       pc.skill.small_guns >= 200 or pc.skill.big_guns >= 200 or pc.skill.energy_weapons >= 200 or pc.skill.throwing >= 200;  +3 to a weapon's damage range when using small or big guns
@@ -76,7 +76,7 @@ Quick Recovery;         None;                                               3;  
 Right between the Eyes; None;                                               15;       2;       pc.skill.small_guns >= 200 or pc.skill.big_guns >= 200 or pc.skill.energy_weapons >= 200 or pc.skill.close_combat >= 200;  -100 to your target's helmet's critical chance modifiers
 Sharpshooter;           pc.view_range+=6;                                   9;        2;       pc.skill.small_guns >= 150 or pc.skill.big_guns >= 150 or pc.skill.energy_weapons >= 150 or pc.skill.throwing >= 150;  +2 to Perception when determining how far you can see, +8 to your chance to hit
 Silent Death;           None;                                               15;       2;       pc.skill.sneak >= 175;                                                       Attacking a critter from behind always causes a critical hit when unarmed, using melee weapons or firing one-handed guns. It's also component of speedboost.
-Silent Running;         None;                                               15;       2;       pc.skill.sneak >= 125;                                                       No penalty for running while in sneak mode
+Silent Running;         None;                                               12;       2;       pc.skill.sneak >= 100;                                                       No penalty for running while in sneak mode
 Spray and Pray;         None;                                               6;        2;       pc.skill.small_guns >= 125 or pc.skill.big_guns >= 125 or pc.skill.energy_weapons >= 125 or pc.skill.throwing >= 125;  Reduces target's armor and helmet critical hit power protection.
 Stonewall;              None;                                               9;        2;       pc.special.S >= 5;                                                        Better chance of avoiding knock-downs and knock-outs
 Toughness;              pc.dr.normal+=8, pc.dt.normal+=2;                   6;        2;       pc.special.E>= 4;                                                         +2 to DT, +8 to DR
@@ -84,18 +84,18 @@ Toughness+;             pc.dr.normal+=8, pc.dt.normal+=3;                   9;  
 Tree Trunk Thighs;      None;                                               6;        2;       pc.special.E >= 6;                                                        Leg shots are much less likely to knock you down
 Weapon Handling;        None;                                               3;        2;       pc.skill.small_guns >= 100 or pc.skill.big_guns >= 100;                                      +2 to Strength when calculating chance to hit
 Bounty Hunter;          pc.special.L+=3;                                                            80;       3;       pc.class_perk is None;                                                                  More powerful crits. No combat drugs. You can only use healing drugs such as stimpaks. +3 LK
-Chosen One;             pc.special.C+=3, pc.perk_points+=3;                                         30;       3;       pc.class_perk is None;                                                                  Choose 3 extra perks. Lose half of your Healing Rate +3 CH
+Chosen One;             self.perk_effect('chosen_one');                                             30;       3;       pc.class_perk is None;                                                                  Choose 3 extra perks. Lose half of your Healing Rate +3 CH
 Cyborg;                 pc.max_implant_level+=1, pc.max_implants+=5, pc.max_implants_special+=6;    120;      3;       pc.class_perk is None;                                                                  More Implants possibilities, allow install tier III of combat implants. Limited healing abilities and become vulnerable to EMP damage.               none
-Deathclaw Perk;         self.perk_effect('deathclaw');                                              40;       3;       pc.class_perk is None;                                                                  Bonusses to Melee Damage, natural armor, 10 Speedboost. You can't use armors or guns.+3 ST
+Deathclaw Perk;         pc.speed+=10, pc.special.S+=3;                                              40;       3;       pc.class_perk is None;                                                                  Bonusses to Melee Damage, natural armor, 10 Speedboost. You can't use armors or guns.+3 ST
 Priest;                 pc.special.I+=3, pc.healing_rate+=pc.healing_rate;                          70;       3;       pc.class_perk is None;                                                                  Double all heals: First Aid, Healing Rate and meds. Halves your Carry Weight.+3 INT
 Random Boy;             self.perk_effect('random_boy');                                             100;      3;       pc.class_perk is None;                                                                  Get random stat bonuses. You can no longer reroll your character, you loss random stats too.
 Soldier;                self.perk_effect('soldier');                                                110;      3;       pc.class_perk is None;                                                                  +1 to all stats. You have no Defense Critical Hit.
-Super Mutant;           self.perk_effect('mutant');                                                 50;       3;       pc.class_perk is None;                                                                  Double your Hit Points. You can't wear small guns or robes/combat armors.You also cannot run. +3 EN
+Super Mutant;           pc.special.E+=3;                                                            50;       3;       pc.class_perk is None;                                                                  Double your Hit Points. You can't wear small guns or robes/combat armors.You also cannot run. +3 EN
 Killer;                 pc.special.A+=3;                                                            60;       3;       pc.class_perk is None;                                                                  Regen full AP when kill a player(5 AP if you kill NCP).Respawn time is 500 longer.+3 AG
 Assassin;               pc.special.P+=3;                                                            90;       3;       pc.class_perk is None;                                                                  90% to not desneak while attacking. You deal 75% less damage when you unsneak. +3 PE
 Paramedic;              pc.skill.first_aid+=50,pc.skill.doctor+=50, pc.bonus_damage-=50;            50;       3;       pc.class_perk is None;
 Leader;                 None;                                                                       75;       3;       pc.class_perk is None;
-Small Ranged Damage 1;  None;                                                                       55;       4;       None;
+Small Ranged Damage 1;  None;                                                                       55;       4;       True;
 Small Ranged Damage 2;  None;                                                                       55;       4;       'small_ranged_damage_1' in pc.perks;
 Small Ranged Damage 3;  None;                                                                       55;       4;       'small_ranged_damage_2' in pc.perks;
 Small Ranged Damage 4;  None;                                                                       55;       4;       'small_ranged_damage_3' in pc.perks;
@@ -120,14 +120,283 @@ Small Ranged Damage 22; None;                                                   
 Small Ranged Damage 23; None;                                                                       55;       4;       'small_ranged_damage_22' in pc.perks;
 Small Ranged Damage 24; None;                                                                       55;       4;       'small_ranged_damage_23' in pc.perks;
 Small Ranged Damage 25; None;                                                                       55;       4;       'small_ranged_damage_24' in pc.perks;
-Strong Back Lite;       pc.carry_weight+=5;                                                         55;       4;       False;
-Semi Pathfinder;        None;                                                                       55;       4;       False;
-Mini Toughness;         None;                                                                       55;       4;       False;
-Firegecko Slayer;       None;                                                                       55;       4;       False;
-Floater Slayer;         None;                                                                       55;       4;       False;
-Centaur Slayer;         None;                                                                       55;       4;       False;
-Robots Slayer;          None;                                                                       55;       4;       False;
-Deathclaw Slayer;       None;                                                                       55;       4;       False;
-Mutant Slayer;          None;                                                                       55;       4;       False;
-Earth Defender;         None;                                                                       55;       4;       False;
-Human Slayer;           None;                                                                       55;       4;       False;
+Strong Back Lite 1;     pc.carry_weight+=5;                                                         55;       4;       True;
+Strong Back Lite 2;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_1' in pc.perks;
+Strong Back Lite 3;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_2' in pc.perks;
+Strong Back Lite 4;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_3' in pc.perks;
+Strong Back Lite 5;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_4' in pc.perks;
+Strong Back Lite 6;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_5' in pc.perks;
+Strong Back Lite 7;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_6' in pc.perks;
+Strong Back Lite 8;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_7' in pc.perks;
+Strong Back Lite 9;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_8' in pc.perks;
+Strong Back Lite 10;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_9' in pc.perks;
+Strong Back Lite 11;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_10' in pc.perks;
+Strong Back Lite 12;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_11' in pc.perks;
+Strong Back Lite 13;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_12' in pc.perks;
+Strong Back Lite 14;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_13' in pc.perks;
+Strong Back Lite 15;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_14' in pc.perks;
+Strong Back Lite 16;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_15' in pc.perks;
+Strong Back Lite 17;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_16' in pc.perks;
+Strong Back Lite 18;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_17' in pc.perks;
+Strong Back Lite 19;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_18' in pc.perks;
+Strong Back Lite 20;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_19' in pc.perks;
+Strong Back Lite 21;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_20' in pc.perks;
+Strong Back Lite 22;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_21' in pc.perks;
+Strong Back Lite 23;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_22' in pc.perks;
+Strong Back Lite 24;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_23' in pc.perks;
+Strong Back Lite 25;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_24' in pc.perks;
+Strong Back Lite 26;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_25' in pc.perks;
+Strong Back Lite 27;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_26' in pc.perks;
+Strong Back Lite 28;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_27' in pc.perks;
+Strong Back Lite 29;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_28' in pc.perks;
+Strong Back Lite 30;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_29' in pc.perks;
+Strong Back Lite 31;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_30' in pc.perks;
+Strong Back Lite 32;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_31' in pc.perks;
+Strong Back Lite 33;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_32' in pc.perks;
+Strong Back Lite 34;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_33' in pc.perks;
+Strong Back Lite 35;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_34' in pc.perks;
+Strong Back Lite 36;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_35' in pc.perks;
+Strong Back Lite 37;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_36' in pc.perks;
+Strong Back Lite 38;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_37' in pc.perks;
+Strong Back Lite 39;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_38' in pc.perks;
+Strong Back Lite 40;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_39' in pc.perks;
+Strong Back Lite 41;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_40' in pc.perks;
+Strong Back Lite 42;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_41' in pc.perks;
+Strong Back Lite 43;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_42' in pc.perks;
+Strong Back Lite 44;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_43' in pc.perks;
+Strong Back Lite 45;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_44' in pc.perks;
+Strong Back Lite 46;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_45' in pc.perks;
+Strong Back Lite 47;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_46' in pc.perks;
+Strong Back Lite 48;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_47' in pc.perks;
+Strong Back Lite 49;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_48' in pc.perks;
+Strong Back Lite 50;     pc.carry_weight+=5;                                                         55;       4;       'strong_back_lite_49' in pc.perks;
+Semi Pathfinder 1;     None;             55;       4;       True;
+Semi Pathfinder 2;     None;             55;       4;       'semi_pathfinder_1' in pc.perks;
+Semi Pathfinder 3;     None;             55;       4;       'semi_pathfinder_2' in pc.perks;
+Semi Pathfinder 4;     None;             55;       4;       'semi_pathfinder_3' in pc.perks;
+Semi Pathfinder 5;     None;             55;       4;       'semi_pathfinder_4' in pc.perks;
+Mini Toughness 1;     None;             55;       4;       True;
+Mini Toughness 2;     None;             55;       4;       'mini_toughness_1' in pc.perks;
+Mini Toughness 3;     None;             55;       4;       'mini_toughness_2' in pc.perks;
+Mini Toughness 4;     None;             55;       4;       'mini_toughness_3' in pc.perks;
+Mini Toughness 5;     None;             55;       4;       'mini_toughness_4' in pc.perks;
+Mini Toughness 6;     None;             55;       4;       'mini_toughness_5' in pc.perks;
+Mini Toughness 7;     None;             55;       4;       'mini_toughness_6' in pc.perks;
+Mini Toughness 8;     None;             55;       4;       'mini_toughness_7' in pc.perks;
+Mini Toughness 9;     None;             55;       4;       'mini_toughness_8' in pc.perks;
+Mini Toughness 10;     None;             55;       4;       'mini_toughness_9' in pc.perks;
+Mini Toughness 11;     None;             55;       4;       'mini_toughness_10' in pc.perks;
+Mini Toughness 12;     None;             55;       4;       'mini_toughness_11' in pc.perks;
+Mini Toughness 13;     None;             55;       4;       'mini_toughness_12' in pc.perks;
+Mini Toughness 14;     None;             55;       4;       'mini_toughness_13' in pc.perks;
+Mini Toughness 15;     None;             55;       4;       'mini_toughness_14' in pc.perks;
+Mini Toughness 16;     None;             55;       4;       'mini_toughness_15' in pc.perks;
+Mini Toughness 17;     None;             55;       4;       'mini_toughness_16' in pc.perks;
+Mini Toughness 18;     None;             55;       4;       'mini_toughness_17' in pc.perks;
+Mini Toughness 19;     None;             55;       4;       'mini_toughness_18' in pc.perks;
+Mini Toughness 20;     None;             55;       4;       'mini_toughness_19' in pc.perks;
+Mini Toughness 21;     None;             55;       4;       'mini_toughness_20' in pc.perks;
+Mini Toughness 22;     None;             55;       4;       'mini_toughness_21' in pc.perks;
+Mini Toughness 23;     None;             55;       4;       'mini_toughness_22' in pc.perks;
+Mini Toughness 24;     None;             55;       4;       'mini_toughness_23' in pc.perks;
+Mini Toughness 25;     None;             55;       4;       'mini_toughness_24' in pc.perks;
+Firegecko Slayer 1;     None;             55;       4;       True;
+Firegecko Slayer 2;     None;             55;       4;       'firegecko_slayer_1' in pc.perks;
+Firegecko Slayer 3;     None;             55;       4;       'firegecko_slayer_2' in pc.perks;
+Firegecko Slayer 4;     None;             55;       4;       'firegecko_slayer_3' in pc.perks;
+Firegecko Slayer 5;     None;             55;       4;       'firegecko_slayer_4' in pc.perks;
+Firegecko Slayer 6;     None;             55;       4;       'firegecko_slayer_5' in pc.perks;
+Firegecko Slayer 7;     None;             55;       4;       'firegecko_slayer_6' in pc.perks;
+Firegecko Slayer 8;     None;             55;       4;       'firegecko_slayer_7' in pc.perks;
+Firegecko Slayer 9;     None;             55;       4;       'firegecko_slayer_8' in pc.perks;
+Firegecko Slayer 10;     None;             55;       4;       'firegecko_slayer_9' in pc.perks;
+Firegecko Slayer 11;     None;             55;       4;       'firegecko_slayer_10' in pc.perks;
+Firegecko Slayer 12;     None;             55;       4;       'firegecko_slayer_11' in pc.perks;
+Firegecko Slayer 13;     None;             55;       4;       'firegecko_slayer_12' in pc.perks;
+Firegecko Slayer 14;     None;             55;       4;       'firegecko_slayer_13' in pc.perks;
+Firegecko Slayer 15;     None;             55;       4;       'firegecko_slayer_14' in pc.perks;
+Firegecko Slayer 16;     None;             55;       4;       'firegecko_slayer_15' in pc.perks;
+Firegecko Slayer 17;     None;             55;       4;       'firegecko_slayer_16' in pc.perks;
+Firegecko Slayer 18;     None;             55;       4;       'firegecko_slayer_17' in pc.perks;
+Firegecko Slayer 19;     None;             55;       4;       'firegecko_slayer_18' in pc.perks;
+Firegecko Slayer 20;     None;             55;       4;       'firegecko_slayer_19' in pc.perks;
+Firegecko Slayer 21;     None;             55;       4;       'firegecko_slayer_20' in pc.perks;
+Firegecko Slayer 22;     None;             55;       4;       'firegecko_slayer_21' in pc.perks;
+Firegecko Slayer 23;     None;             55;       4;       'firegecko_slayer_22' in pc.perks;
+Firegecko Slayer 24;     None;             55;       4;       'firegecko_slayer_23' in pc.perks;
+Firegecko Slayer 25;     None;             55;       4;       'firegecko_slayer_24' in pc.perks;
+Floater Slayer 1;     None;             55;       4;       True;
+Floater Slayer 2;     None;             55;       4;       'floater_slayer_1' in pc.perks;
+Floater Slayer 3;     None;             55;       4;       'floater_slayer_2' in pc.perks;
+Floater Slayer 4;     None;             55;       4;       'floater_slayer_3' in pc.perks;
+Floater Slayer 5;     None;             55;       4;       'floater_slayer_4' in pc.perks;
+Floater Slayer 6;     None;             55;       4;       'floater_slayer_5' in pc.perks;
+Floater Slayer 7;     None;             55;       4;       'floater_slayer_6' in pc.perks;
+Floater Slayer 8;     None;             55;       4;       'floater_slayer_7' in pc.perks;
+Floater Slayer 9;     None;             55;       4;       'floater_slayer_8' in pc.perks;
+Floater Slayer 10;     None;             55;       4;       'floater_slayer_9' in pc.perks;
+Floater Slayer 11;     None;             55;       4;       'floater_slayer_10' in pc.perks;
+Floater Slayer 12;     None;             55;       4;       'floater_slayer_11' in pc.perks;
+Floater Slayer 13;     None;             55;       4;       'floater_slayer_12' in pc.perks;
+Floater Slayer 14;     None;             55;       4;       'floater_slayer_13' in pc.perks;
+Floater Slayer 15;     None;             55;       4;       'floater_slayer_14' in pc.perks;
+Floater Slayer 16;     None;             55;       4;       'floater_slayer_15' in pc.perks;
+Floater Slayer 17;     None;             55;       4;       'floater_slayer_16' in pc.perks;
+Floater Slayer 18;     None;             55;       4;       'floater_slayer_17' in pc.perks;
+Floater Slayer 19;     None;             55;       4;       'floater_slayer_18' in pc.perks;
+Floater Slayer 20;     None;             55;       4;       'floater_slayer_19' in pc.perks;
+Floater Slayer 21;     None;             55;       4;       'floater_slayer_20' in pc.perks;
+Floater Slayer 22;     None;             55;       4;       'floater_slayer_21' in pc.perks;
+Floater Slayer 23;     None;             55;       4;       'floater_slayer_22' in pc.perks;
+Floater Slayer 24;     None;             55;       4;       'floater_slayer_23' in pc.perks;
+Floater Slayer 25;     None;             55;       4;       'floater_slayer_24' in pc.perks;
+Centaur Slayer 1;     None;             55;       4;       True;
+Centaur Slayer 2;     None;             55;       4;       'centaur_slayer_1' in pc.perks;
+Centaur Slayer 3;     None;             55;       4;       'centaur_slayer_2' in pc.perks;
+Centaur Slayer 4;     None;             55;       4;       'centaur_slayer_3' in pc.perks;
+Centaur Slayer 5;     None;             55;       4;       'centaur_slayer_4' in pc.perks;
+Centaur Slayer 6;     None;             55;       4;       'centaur_slayer_5' in pc.perks;
+Centaur Slayer 7;     None;             55;       4;       'centaur_slayer_6' in pc.perks;
+Centaur Slayer 8;     None;             55;       4;       'centaur_slayer_7' in pc.perks;
+Centaur Slayer 9;     None;             55;       4;       'centaur_slayer_8' in pc.perks;
+Centaur Slayer 10;     None;             55;       4;       'centaur_slayer_9' in pc.perks;
+Centaur Slayer 11;     None;             55;       4;       'centaur_slayer_10' in pc.perks;
+Centaur Slayer 12;     None;             55;       4;       'centaur_slayer_11' in pc.perks;
+Centaur Slayer 13;     None;             55;       4;       'centaur_slayer_12' in pc.perks;
+Centaur Slayer 14;     None;             55;       4;       'centaur_slayer_13' in pc.perks;
+Centaur Slayer 15;     None;             55;       4;       'centaur_slayer_14' in pc.perks;
+Centaur Slayer 16;     None;             55;       4;       'centaur_slayer_15' in pc.perks;
+Centaur Slayer 17;     None;             55;       4;       'centaur_slayer_16' in pc.perks;
+Centaur Slayer 18;     None;             55;       4;       'centaur_slayer_17' in pc.perks;
+Centaur Slayer 19;     None;             55;       4;       'centaur_slayer_18' in pc.perks;
+Centaur Slayer 20;     None;             55;       4;       'centaur_slayer_19' in pc.perks;
+Centaur Slayer 21;     None;             55;       4;       'centaur_slayer_20' in pc.perks;
+Centaur Slayer 22;     None;             55;       4;       'centaur_slayer_21' in pc.perks;
+Centaur Slayer 23;     None;             55;       4;       'centaur_slayer_22' in pc.perks;
+Centaur Slayer 24;     None;             55;       4;       'centaur_slayer_23' in pc.perks;
+Centaur Slayer 25;     None;             55;       4;       'centaur_slayer_24' in pc.perks;
+Robots Slayer 1;     None;             55;       4;       True;
+Robots Slayer 2;     None;             55;       4;       'robots_slayer_1' in pc.perks;
+Robots Slayer 3;     None;             55;       4;       'robots_slayer_2' in pc.perks;
+Robots Slayer 4;     None;             55;       4;       'robots_slayer_3' in pc.perks;
+Robots Slayer 5;     None;             55;       4;       'robots_slayer_4' in pc.perks;
+Robots Slayer 6;     None;             55;       4;       'robots_slayer_5' in pc.perks;
+Robots Slayer 7;     None;             55;       4;       'robots_slayer_6' in pc.perks;
+Robots Slayer 8;     None;             55;       4;       'robots_slayer_7' in pc.perks;
+Robots Slayer 9;     None;             55;       4;       'robots_slayer_8' in pc.perks;
+Robots Slayer 10;     None;             55;       4;       'robots_slayer_9' in pc.perks;
+Robots Slayer 11;     None;             55;       4;       'robots_slayer_10' in pc.perks;
+Robots Slayer 12;     None;             55;       4;       'robots_slayer_11' in pc.perks;
+Robots Slayer 13;     None;             55;       4;       'robots_slayer_12' in pc.perks;
+Robots Slayer 14;     None;             55;       4;       'robots_slayer_13' in pc.perks;
+Robots Slayer 15;     None;             55;       4;       'robots_slayer_14' in pc.perks;
+Robots Slayer 16;     None;             55;       4;       'robots_slayer_15' in pc.perks;
+Robots Slayer 17;     None;             55;       4;       'robots_slayer_16' in pc.perks;
+Robots Slayer 18;     None;             55;       4;       'robots_slayer_17' in pc.perks;
+Robots Slayer 19;     None;             55;       4;       'robots_slayer_18' in pc.perks;
+Robots Slayer 20;     None;             55;       4;       'robots_slayer_19' in pc.perks;
+Robots Slayer 21;     None;             55;       4;       'robots_slayer_20' in pc.perks;
+Robots Slayer 22;     None;             55;       4;       'robots_slayer_21' in pc.perks;
+Robots Slayer 23;     None;             55;       4;       'robots_slayer_22' in pc.perks;
+Robots Slayer 24;     None;             55;       4;       'robots_slayer_23' in pc.perks;
+Robots Slayer 25;     None;             55;       4;       'robots_slayer_24' in pc.perks;
+Deathclaw Slayer 1;     None;             55;       4;       True;
+Deathclaw Slayer 2;     None;             55;       4;       'deathclaw_slayer_1' in pc.perks;
+Deathclaw Slayer 3;     None;             55;       4;       'deathclaw_slayer_2' in pc.perks;
+Deathclaw Slayer 4;     None;             55;       4;       'deathclaw_slayer_3' in pc.perks;
+Deathclaw Slayer 5;     None;             55;       4;       'deathclaw_slayer_4' in pc.perks;
+Deathclaw Slayer 6;     None;             55;       4;       'deathclaw_slayer_5' in pc.perks;
+Deathclaw Slayer 7;     None;             55;       4;       'deathclaw_slayer_6' in pc.perks;
+Deathclaw Slayer 8;     None;             55;       4;       'deathclaw_slayer_7' in pc.perks;
+Deathclaw Slayer 9;     None;             55;       4;       'deathclaw_slayer_8' in pc.perks;
+Deathclaw Slayer 10;     None;             55;       4;       'deathclaw_slayer_9' in pc.perks;
+Deathclaw Slayer 11;     None;             55;       4;       'deathclaw_slayer_10' in pc.perks;
+Deathclaw Slayer 12;     None;             55;       4;       'deathclaw_slayer_11' in pc.perks;
+Deathclaw Slayer 13;     None;             55;       4;       'deathclaw_slayer_12' in pc.perks;
+Deathclaw Slayer 14;     None;             55;       4;       'deathclaw_slayer_13' in pc.perks;
+Deathclaw Slayer 15;     None;             55;       4;       'deathclaw_slayer_14' in pc.perks;
+Deathclaw Slayer 16;     None;             55;       4;       'deathclaw_slayer_15' in pc.perks;
+Deathclaw Slayer 17;     None;             55;       4;       'deathclaw_slayer_16' in pc.perks;
+Deathclaw Slayer 18;     None;             55;       4;       'deathclaw_slayer_17' in pc.perks;
+Deathclaw Slayer 19;     None;             55;       4;       'deathclaw_slayer_18' in pc.perks;
+Deathclaw Slayer 20;     None;             55;       4;       'deathclaw_slayer_19' in pc.perks;
+Deathclaw Slayer 21;     None;             55;       4;       'deathclaw_slayer_20' in pc.perks;
+Deathclaw Slayer 22;     None;             55;       4;       'deathclaw_slayer_21' in pc.perks;
+Deathclaw Slayer 23;     None;             55;       4;       'deathclaw_slayer_22' in pc.perks;
+Deathclaw Slayer 24;     None;             55;       4;       'deathclaw_slayer_23' in pc.perks;
+Deathclaw Slayer 25;     None;             55;       4;       'deathclaw_slayer_24' in pc.perks;
+Mutant Slayer 1;     None;             55;       4;       True;
+Mutant Slayer 2;     None;             55;       4;       'mutant_slayer_1' in pc.perks;
+Mutant Slayer 3;     None;             55;       4;       'mutant_slayer_2' in pc.perks;
+Mutant Slayer 4;     None;             55;       4;       'mutant_slayer_3' in pc.perks;
+Mutant Slayer 5;     None;             55;       4;       'mutant_slayer_4' in pc.perks;
+Mutant Slayer 6;     None;             55;       4;       'mutant_slayer_5' in pc.perks;
+Mutant Slayer 7;     None;             55;       4;       'mutant_slayer_6' in pc.perks;
+Mutant Slayer 8;     None;             55;       4;       'mutant_slayer_7' in pc.perks;
+Mutant Slayer 9;     None;             55;       4;       'mutant_slayer_8' in pc.perks;
+Mutant Slayer 10;     None;             55;       4;       'mutant_slayer_9' in pc.perks;
+Mutant Slayer 11;     None;             55;       4;       'mutant_slayer_10' in pc.perks;
+Mutant Slayer 12;     None;             55;       4;       'mutant_slayer_11' in pc.perks;
+Mutant Slayer 13;     None;             55;       4;       'mutant_slayer_12' in pc.perks;
+Mutant Slayer 14;     None;             55;       4;       'mutant_slayer_13' in pc.perks;
+Mutant Slayer 15;     None;             55;       4;       'mutant_slayer_14' in pc.perks;
+Mutant Slayer 16;     None;             55;       4;       'mutant_slayer_15' in pc.perks;
+Mutant Slayer 17;     None;             55;       4;       'mutant_slayer_16' in pc.perks;
+Mutant Slayer 18;     None;             55;       4;       'mutant_slayer_17' in pc.perks;
+Mutant Slayer 19;     None;             55;       4;       'mutant_slayer_18' in pc.perks;
+Mutant Slayer 20;     None;             55;       4;       'mutant_slayer_19' in pc.perks;
+Mutant Slayer 21;     None;             55;       4;       'mutant_slayer_20' in pc.perks;
+Mutant Slayer 22;     None;             55;       4;       'mutant_slayer_21' in pc.perks;
+Mutant Slayer 23;     None;             55;       4;       'mutant_slayer_22' in pc.perks;
+Mutant Slayer 24;     None;             55;       4;       'mutant_slayer_23' in pc.perks;
+Mutant Slayer 25;     None;             55;       4;       'mutant_slayer_24' in pc.perks;
+Earth Defender 1;     None;             55;       4;       True;
+Earth Defender 2;     None;             55;       4;       'earth_defender_1' in pc.perks;
+Earth Defender 3;     None;             55;       4;       'earth_defender_2' in pc.perks;
+Earth Defender 4;     None;             55;       4;       'earth_defender_3' in pc.perks;
+Earth Defender 5;     None;             55;       4;       'earth_defender_4' in pc.perks;
+Earth Defender 6;     None;             55;       4;       'earth_defender_5' in pc.perks;
+Earth Defender 7;     None;             55;       4;       'earth_defender_6' in pc.perks;
+Earth Defender 8;     None;             55;       4;       'earth_defender_7' in pc.perks;
+Earth Defender 9;     None;             55;       4;       'earth_defender_8' in pc.perks;
+Earth Defender 10;     None;             55;       4;       'earth_defender_9' in pc.perks;
+Earth Defender 11;     None;             55;       4;       'earth_defender_10' in pc.perks;
+Earth Defender 12;     None;             55;       4;       'earth_defender_11' in pc.perks;
+Earth Defender 13;     None;             55;       4;       'earth_defender_12' in pc.perks;
+Earth Defender 14;     None;             55;       4;       'earth_defender_13' in pc.perks;
+Earth Defender 15;     None;             55;       4;       'earth_defender_14' in pc.perks;
+Earth Defender 16;     None;             55;       4;       'earth_defender_15' in pc.perks;
+Earth Defender 17;     None;             55;       4;       'earth_defender_16' in pc.perks;
+Earth Defender 18;     None;             55;       4;       'earth_defender_17' in pc.perks;
+Earth Defender 19;     None;             55;       4;       'earth_defender_18' in pc.perks;
+Earth Defender 20;     None;             55;       4;       'earth_defender_19' in pc.perks;
+Earth Defender 21;     None;             55;       4;       'earth_defender_20' in pc.perks;
+Earth Defender 22;     None;             55;       4;       'earth_defender_21' in pc.perks;
+Earth Defender 23;     None;             55;       4;       'earth_defender_22' in pc.perks;
+Earth Defender 24;     None;             55;       4;       'earth_defender_23' in pc.perks;
+Earth Defender 25;     None;             55;       4;       'earth_defender_24' in pc.perks;
+Murder 1;     None;             55;       4;       True;
+Murder 2;     None;             55;       4;       'murder_1' in pc.perks;
+Murder 3;     None;             55;       4;       'murder_2' in pc.perks;
+Murder 4;     None;             55;       4;       'murder_3' in pc.perks;
+Murder 5;     None;             55;       4;       'murder_4' in pc.perks;
+Murder 6;     None;             55;       4;       'murder_5' in pc.perks;
+Murder 7;     None;             55;       4;       'murder_6' in pc.perks;
+Murder 8;     None;             55;       4;       'murder_7' in pc.perks;
+Murder 9;     None;             55;       4;       'murder_8' in pc.perks;
+Murder 10;     None;             55;       4;       'murder_9' in pc.perks;
+Murder 11;     None;             55;       4;       'murder_10' in pc.perks;
+Murder 12;     None;             55;       4;       'murder_11' in pc.perks;
+Murder 13;     None;             55;       4;       'murder_12' in pc.perks;
+Murder 14;     None;             55;       4;       'murder_13' in pc.perks;
+Murder 15;     None;             55;       4;       'murder_14' in pc.perks;
+Murder 16;     None;             55;       4;       'murder_15' in pc.perks;
+Murder 17;     None;             55;       4;       'murder_16' in pc.perks;
+Murder 18;     None;             55;       4;       'murder_17' in pc.perks;
+Murder 19;     None;             55;       4;       'murder_18' in pc.perks;
+Murder 20;     None;             55;       4;       'murder_19' in pc.perks;
+Murder 21;     None;             55;       4;       'murder_20' in pc.perks;
+Murder 22;     None;             55;       4;       'murder_21' in pc.perks;
+Murder 23;     None;             55;       4;       'murder_22' in pc.perks;
+Murder 24;     None;             55;       4;       'murder_23' in pc.perks;
+Murder 25;     None;             55;       4;       'murder_24' in pc.perks;
