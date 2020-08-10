@@ -26,5 +26,4 @@ You can get a pre-build binary for Windows here (You won't need Python nor Kivy 
 
 https://github.com/wezu/SaFoP/releases/download/3.1/safop_s3_1_win32.zip
 
-It is made using PyInstaller, so most likely marked as a virus by some crappy anti-virus, and/or Chrome. Can't be helped.
-
+It is made by just packing Python +Kivi + scripts and using sitecustomize.py to import the modules automagically. Antivirus software should not detect it anymore https://www.virustotal.com/gui/file/a4512897721f874a0de12981e637178093db78118ebbd49693b21d74eb4e2abc/detection
