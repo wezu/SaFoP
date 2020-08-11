@@ -108,6 +108,14 @@ PERK_TYPE_NORMAL = 2
 PERK_TYPE_CLASS = 3
 PERK_TYPE_PVE = 4
 
+special_fullname = {'S':'Strength',
+                    'P':'Perception',
+                    'E':'Endurance',
+                    'C':'Charisma',
+                    'I':'Intelligence',
+                    'A':'Agility',
+                    'L':'Luck'}
+
 #setup containers for the stats
 #most don't need to be set, but they are here for reference
 pc = dotdict()
@@ -550,10 +558,16 @@ class PlannerApp(App):
             if widget.collapse:
                 return
         text='Level: '+str(pc.level)+'\n'
-        text+='Attributes:\n'
+        text+='SPECIAL:\n    Start   Final   Drugged\n'
         for spec in 'SPECIAL':
-            value=min(20, max(1, pc.special[spec]+pc.bonus.special[spec]))
-            text+=' '+spec+': '+str(value)+'\n'
+            if self.level_history:
+                start_value = min(20, max(1, self.level_history[0].special[spec]))
+            else:
+                start_value = min(20, max(1, pc.special[spec]))
+            final_value = min(20, max(1, pc.special[spec]))
+            drugged_value=min(20, max(1, pc.special[spec]+pc.bonus.special[spec]))
+            #text+=' '+spec+': '+str(value)+'\n'
+            text += ' {0}:  {1:>2}      {2:>2}       {3:>2}\n'.format(spec, start_value, final_value,drugged_value)
         text+='\nTraits:\n'
         if not pc.traits:
             text+=' None\n'
@@ -572,6 +586,18 @@ class PlannerApp(App):
             text+=' None\n'
         else:
             text+=' '+self.known_perks_class[pc.class_perk]['name']+'\n'
+
+        text+='\nImplants:\n'
+        for imp_id in self.known_implants:
+            if pc.implants[imp_id] > 0:
+                text += ' '+str(pc.implants[imp_id])+'x '+self.known_implants[imp_id]['name']+'\n'
+        for spec in 'SPECIAL':
+            if pc.implants_special[spec] > 0:
+                text += ' '+str(pc.implants_special[spec])+'x '+special_fullname[spec]+'\n'
+
+        text+='\nCurrent Drugs:\n'
+        for drug_id in pc.drugs:
+            text += ' -'+self.known_drugs[drug_id]['name']+'\n'
 
         hp = pc.hit_points+pc.bonus_hit_points
         if 'super_mutant' in pc.perks:
@@ -631,6 +657,13 @@ class PlannerApp(App):
         if 'bonus_hth_attacks' in pc.perks and 'bonus_hth_damage' in pc.perks:
             speed+=25
         text+='\nRun Speed:\n '+str(speed)+'%\n'
+
+        text+='\nTotal Damage:\n '+str(100+pc.bonus_damage)+'%\n'
+        text+='\nBonus Damage (per bullet):\n +'+str(pc.per_bullet_dmg)+'\n'
+        text+='\nFlat Bonus Damage:\n +'+str(pc.flat_damage)+'\n'
+        text+='\nFire Bonus Damage:\n +'+str(pc.flat_fire_damage)+'\n'
+
+
         text+='\nDamage Threshold/Damage Resistance:\n'
         text+=' Normal:   '+str(min(90, self._get_dt('normal')))+'/'+str(self._get_dr('normal'))+'\n'
         text+=' Laser:    '+str(min(90, self._get_dt('laser')))+'/'+str(self._get_dr('laser'))+'\n'
