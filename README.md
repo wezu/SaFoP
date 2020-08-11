@@ -4,6 +4,8 @@ Standalone Fonline Planer
 ![screenshot](https://raw.githubusercontent.com/wezu/SaFoP/master/screenshot.png)
 
 ## How to run?
+On Windows: Download and unzip the binary from the link below.
+
 To run this program you will need to install Python and Kivy.
 
 To install Python go to https://www.python.org/downloads/ download and install any 3.7.x version.
@@ -24,6 +26,6 @@ To run the program type in `python main.py` after navigating to the directory wh
 ## Binary for windows
 You can get a pre-build binary for Windows here (You won't need Python nor Kivy to run it):
 
-https://github.com/wezu/SaFoP/releases/download/3.1/safop_s3_1_win32.zip
+https://github.com/wezu/SaFoP/releases/download/3.1/safop_s3_11_win32.zip
 
 It is made by just packing Python +Kivi + scripts and using sitecustomize.py to import the modules automagically. Antivirus software should not detect it anymore https://www.virustotal.com/gui/file/a4512897721f874a0de12981e637178093db78118ebbd49693b21d74eb4e2abc/detection
