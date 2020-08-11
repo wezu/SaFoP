@@ -15,7 +15,7 @@ After Burner Gum;   pc.critical_chance+=10, pc.bonus.special.L-=5, pc.hth_critic
 Mutie;              pc.dt.normal+=3, pc.dt.laser+=3, pc.dt.explode+=3, pc.bonus.ap-=2
 Voodoo;             pc.bonus.special.L+=3, pc.bonus.special.E-=2, pc.bonus.special.S-=2
 Brain;              pc.bonus.special.I+=3, pc.speed+=5
-Eye;                pc.bonus.special.P+=3, pc.dr.laser+=15
+Eye;                pc.bonus.special.P+=3, pc.dr.laser+=13
 Ear;                pc.bonus.special.L+=4, pc.action_points+=2
 Heart;              pc.bonus.special.E+=4, pc.bonus_hit_points+=20
 Liver;              pc.bonus.special.S+=3, pc.dt.normal+=7
